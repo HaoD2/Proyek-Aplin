@@ -1,20 +1,39 @@
 <?php
 require_once('helper.php');
 
+
+$db = new Connection;
+$conn = $db->getConnection();
+
+
 if (isset($_POST['asRegister'])) {
+	$isCheck = false;
 	$username = $_POST['username'];
 	$password = $_POST['pass'];
+	$fullname = $_POST['fullname'];
 	$cpassword = $_POST['cpass'];
 	$email = $_POST['email'];
 	if ($username == "" && $password == "" && $email == "" && $username == "") {
-		alert("Register Tidak Berhasil");
+		alert("Fill Blank !!!");
 	} else {
-		if ($password == $cpassword) {
-			
-			
-			alert("Berhasil");
-		}else{
-			alert("Password Tidak Sama");
+		$user = $conn->query("select * from user")->fetch_all(MYSQLI_ASSOC);
+		foreach ($user as $value) {
+			# code...
+			if ($value['email'] == $email || $value['username'] == $username) {
+				$isCheck = true;
+			}
+		}
+		if ($isCheck) {
+			alert("Email/Username sudah Digunakan");
+		} else {
+			if ($password == $cpassword) {
+				$password = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
+				$q = "INSERT INTO user VALUES('$username','$fullname','$email','$password')";
+				$conn->query($q);
+				alert("Berhasil");
+			} else {
+				alert("Password Tidak Sama");
+			}
 		}
 	}
 }
@@ -72,7 +91,14 @@ if (isset($_POST['asRegister'])) {
 							<i class="fa fa-users" aria-hidden="true"></i>
 						</span>
 					</div>
-					<div class="wrap-input100 " >
+					<div class="wrap-input100 ">
+						<input class="input100" type="text" name="fullname" placeholder="fullname">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-users" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div class="wrap-input100 ">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -80,15 +106,15 @@ if (isset($_POST['asRegister'])) {
 						</span>
 					</div>
 
-					<div class="wrap-input100 "	>
+					<div class="wrap-input100 ">
 						<input class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
-					<div class="wrap-input100 " >
-						<input class="input100" type="password" name="Cpass" placeholder="Confirm-Password">
+					<div class="wrap-input100 ">
+						<input class="input100" type="password" name="cpass" placeholder="Confirm-Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
