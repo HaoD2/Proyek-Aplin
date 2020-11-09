@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2020 at 09:39 AM
+-- Generation Time: Nov 09, 2020 at 06:05 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -32,18 +32,20 @@ USE `proyek`;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
-  `full_name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `fullname` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(552) NOT NULL,
+  `role` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `full_name`, `email`, `password`) VALUES
-('Kevin', 'Kevin Hao', 'Kev@server7mail.com', '$2y$10$2YrFIeH0leSnqgyUDZsdNOoPwcxHrxw6EEKFZi0wLBkTghELhb92q'),
-('Russel', 'Russel Chan', 'russelchandra21@ymail7.com', '$2y$10$5dBsmUJTb2VLdfmE0SDxOu4affAPCtSCTkQpfxMKPCbZVVD0NKusC');
+INSERT INTO `user` (`username`, `fullname`, `password`, `email`, `role`) VALUES
+('admin', 'admin', '$2y$10$EtuV6F6MWYDYV.9o3Qbo/.4c0X4KsrsyfpXs8cltgN0it.S56wOZC', 'admin@serverhost.co.id', 1),
+('kevin', 'Kevin Hao', '$2y$10$vWIk706qzH6TExniINxYaOyNibiI2UUnpFsIh6WA8dStQ0sy1PNvu', 'Kev@server7mail.com', 3),
+('Viora', 'Viora A', '$2y$10$u/oSUsl03qj67vsQFgMtSOujcgX6iqzD1WhGb.MPwF4azlfgHLYkq', 'viora21@stts.edu', 2);
 
 --
 -- Indexes for dumped tables

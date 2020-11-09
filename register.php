@@ -13,6 +13,7 @@ if (isset($_POST['asRegister'])) {
 	$fullname = $_POST['fullname'];
 	$cpassword = $_POST['cpass'];
 	$email = $_POST['email'];
+	$role = $_POST['role'];
 	if ($username == "" && $password == "" && $email == "" && $username == "") {
 		alert("Fill Blank !!!");
 	} else {
@@ -27,18 +28,22 @@ if (isset($_POST['asRegister'])) {
 			alert("Email/Username sudah Digunakan");
 		} else {
 			if ($password == $cpassword) {
-				$password = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
-				$q = "INSERT INTO user VALUES('$username','$fullname','$email','$password')";
-				$conn->query($q);
-				alert("Berhasil");
+				$password = password_hash($_REQUEST["pass"], PASSWORD_DEFAULT);
+				if ($role == "VIP") {
+					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',2)";
+					$conn->query($q);
+					alert("Berhasil");
+				} else if ($role == "Member") {
+					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',3)";
+					$conn->query($q);
+					alert("Berhasil");
+				}
 			} else {
 				alert("Password Tidak Sama");
 			}
 		}
 	}
 }
-
-
 
 ?>
 
@@ -120,7 +125,19 @@ if (isset($_POST['asRegister'])) {
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
-
+					<div class="form-radio">
+						<label for="role" class="radio-label">Role :</label>
+						<div class="form-radio-item">
+							<input type="radio" name="role" id="Member" value="Member">
+							<label for="Member">Member</label>
+							<span class="check"></span>
+						</div>
+						<div class="form-radio-item">
+							<input type="radio" name="role" id="VIP" value="VIP">
+							<label for="VIP">VIP</label>
+							<span class="check"></span>
+						</div>
+					</div>
 
 
 					<div class="container-login100-form-btn">
@@ -130,7 +147,7 @@ if (isset($_POST['asRegister'])) {
 					</div>
 
 					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
+						<a class="txt2" href="login.php">
 							Login
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
