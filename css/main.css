@@ -60,6 +60,24 @@ a:hover {
 	text-decoration: none;
   color: #57b846;
 }
+/* #btnlogout{
+  font-family: Poppins-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+#btnlogout:focus {
+	outline: none !important;
+}
+#btnlogout:hover {
+	text-decoration: none;
+  color: #57b846;
+} */
 
 /*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
