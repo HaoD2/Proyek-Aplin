@@ -4,6 +4,10 @@ require_once("helper.php");
 $db = new Connection;
 $conn = $db->getConnection();
 
+if (!isset($_SESSION['auth'])) {
+    header("Location:login.php");
+}
+
 if (isset($_POST['logout'])) {
     header("Location:login.php");
 }

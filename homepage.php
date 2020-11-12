@@ -3,6 +3,9 @@ require_once("helper.php");
 
 $db = new Connection;
 $conn = $db->getConnection();
+if(!isset($_SESSION['auth'])){
+    header("Location:login.php");
+}
 // tolong di fix bang jago
 if (isset($_POST["btnlogout"])) {
     unset($_SESSION['auth']);
@@ -37,16 +40,18 @@ if (isset($_POST["btnlogout"])) {
                 </ul>
             </div>
             <div id="navigation">
-                <ul>
-                    <li><a class="active" href="#">HOME</a></li>
-                    <li><a href="#">NEWS</a></li>
-                    <li><a href="#">IN THEATERS</a></li>
-                    <li><a href="#">COMING SOON</a></li>
-                    <li><a href="#">CONTACT</a></li>
-                    <li><a href="#">ADVERTISE</a></li>
-                    <!-- belum berfungsi -->
-                    <li><button name="btnlogout" id="btnlogout">Log out</button></li>
-                </ul>
+                <form method="post">
+                    <ul>
+                        <li><a class="active" href="#">HOME</a></li>
+                        <li><a href="#">NEWS</a></li>
+                        <li><a href="#">IN THEATERS</a></li>
+                        <li><a href="#">COMING SOON</a></li>
+                        <li><a href="#">CONTACT</a></li>
+                        <li><a href="#">ADVERTISE</a></li>
+                        <!-- belum berfungsi -->
+                        <li><button name="btnlogout" id="btnlogout">Log out</button></li>
+                    </ul>
+                </form>
             </div>
             <div id="sub-navigation">
                 <ul>
