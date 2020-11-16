@@ -49,7 +49,7 @@ if (isset($_POST["btnlogout"])) {
                         <li><a href="#">CONTACT</a></li>
                         <li><a href="#">ADVERTISE</a></li>
                         <!-- belum berfungsi -->
-                        <li><button name="btnlogout" id="btnlogout">Log out</button></li>
+                        <li><button form="form" type="submit" name="btnlogout" class="search-button" id="btnlogout" class="logout">LOGOUT</button></li>
                     </ul>
                 </form>
             </div>
@@ -63,7 +63,7 @@ if (isset($_POST["btnlogout"])) {
                 <div id="search">
                     <form action="#" method="get" accept-charset="utf-8">
                         <label for="search-field">SEARCH</label>
-                        <input type="text" name="search field" value="Enter search here" id="search-field" class="blink search-field" />
+                        <input type="text" name="search field" placeholder="Enter search here" id="search-field" class="blink search-field" />
                         <input type="submit" value="GO!" class="search-button" />
                     </form>
                 </div>
