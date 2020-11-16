@@ -6,6 +6,11 @@ $conn = $db->getConnection();
 if(!isset($_SESSION['auth'])){
     header("Location:login.php");
 }
+//buat ngecek user saat ini
+// else{
+//     $value = $_SESSION['auth'];
+//     $name = $value["fullname"];
+// }
 // tolong di fix bang jago
 if (isset($_POST["btnlogout"])) {
     unset($_SESSION['auth']);
@@ -31,6 +36,7 @@ if (isset($_POST["btnlogout"])) {
     <div id="shell">
         <div id="header">
             <h1 id="logo"><a href="#">MovieHunter</a></h1>
+            <h2>hello, <?=$name?></h2>
             <div class="social"> <span>FOLLOW US ON:</span>
                 <ul>
                     <li><a class="twitter" href="#">twitter</a></li>
@@ -49,7 +55,7 @@ if (isset($_POST["btnlogout"])) {
                         <li><a href="#">CONTACT</a></li>
                         <li><a href="#">ADVERTISE</a></li>
                         <!-- belum berfungsi -->
-                        <li><button form="form" type="submit" name="btnlogout" class="search-button" id="btnlogout" class="logout">LOGOUT</button></li>
+                        <li><a href="login.php">LOGOUT</a></li>
                     </ul>
                 </form>
             </div>

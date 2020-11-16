@@ -9,20 +9,25 @@ if (isset($_POST['login'])) {
 	$username = $_POST['user'];
 	$password = $_POST['pass'];
 	$user = $conn->query("select * from user")->fetch_all(MYSQLI_ASSOC);
+	$ada = false;
 	foreach ($user as $value) {
 		# code...
-		if (password_verify($password, $value["password"])) {
-			$_SESSION['auth'] = $value;
-			if ($value['role'] == 1) {
-				header("Location:admin.php");
-			} else if ($value['role'] == 2) {
-				header("Location:homepage.php");
-			} else if ($value['role'] == 3) {
-				header("Location:homepage.php");
+		if ($username == $value["username"]){
+			if (password_verify($password, $value["password"])) {
+				$_SESSION['auth'] = $value;
+				if ($value['role'] == 1) {
+					header("Location:admin.php");
+				} else if ($value['role'] == 2) {
+					header("Location:homepage.php");
+				} else if ($value['role'] == 3) {
+					header("Location:homepage.php");
+				}
+				$ada = true;
 			}
-		} else {
-			alert("Password / username Salah");
 		}
+	}
+	if(!$ada){
+		alert("Password / username Salah");
 	}
 }
 
