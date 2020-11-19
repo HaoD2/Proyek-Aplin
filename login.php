@@ -15,17 +15,20 @@ if (isset($_POST['login'])) {
 		# code...
 		if ($username == $value["username"]) {
 			if (password_verify($password, $value["password"])) {
-				$_SESSION['auth'] = $value;
+
 				if ($value['role'] == 1) {
+					$_SESSION['auth'] = $value;
 					header("Location:adminuser.php");
 				} else if ($value['role'] == 2) {
 					if ($value['status'] == 1) {
+						$_SESSION['auth'] = $value;
 						header("Location:homepage.php");
 					} else {
 						$ban = true;
 					}
 				} else if ($value['role'] == 3) {
 					if ($value['status'] == 1) {
+						$_SESSION['auth'] = $value;
 						header("Location:homepage.php");
 					} else {
 						$ban = true;
@@ -38,7 +41,7 @@ if (isset($_POST['login'])) {
 	if (!$ada) {
 		alert("Password / username Salah");
 	}
-	if($ban){
+	if ($ban) {
 		alert("Akun Telah Terbanned");
 	}
 }

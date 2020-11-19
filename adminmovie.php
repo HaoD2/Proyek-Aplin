@@ -66,16 +66,6 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
     alert('Please select a file to upload.');
 }
 
-function showImgfromDB()
-{
-    $db = new Connection;
-    $conn = $db->getConnection();
-    $movie = $conn->query("select image from movie")->fetch_all(MYSQLI_ASSOC);
-    foreach ($movie as $value) {
-        $imageUrl = 'images/'.$value['image'];
-    }
-    //<img src="<?= echo $imageUrl"> buat Nampilin nya rencananya mau pake ajax
-}
 
 
 ?>

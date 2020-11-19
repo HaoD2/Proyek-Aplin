@@ -230,7 +230,7 @@ h1#logo a {
 	padding-right:12px;
 }
 .movie-image {
-	float:left;
+	display: flex;
 	width:152px;
 	height:214px;
 	position:relative;
