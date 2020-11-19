@@ -30,11 +30,11 @@ if (isset($_POST['asRegister'])) {
 			if ($password == $cpassword) {
 				$password = password_hash($_REQUEST["pass"], PASSWORD_DEFAULT);
 				if ($role == "VIP") {
-					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',2)";
+					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',2,1)";
 					$conn->query($q);
 					alert("Berhasil");
 				} else if ($role == "Member") {
-					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',3)";
+					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',3,1)";
 					$conn->query($q);
 					alert("Berhasil");
 				}

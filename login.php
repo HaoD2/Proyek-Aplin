@@ -10,24 +10,36 @@ if (isset($_POST['login'])) {
 	$password = $_POST['pass'];
 	$user = $conn->query("select * from user")->fetch_all(MYSQLI_ASSOC);
 	$ada = false;
+	$ban = false;
 	foreach ($user as $value) {
 		# code...
-		if ($username == $value["username"]){
+		if ($username == $value["username"]) {
 			if (password_verify($password, $value["password"])) {
 				$_SESSION['auth'] = $value;
 				if ($value['role'] == 1) {
-					header("Location:admin.php");
+					header("Location:adminuser.php");
 				} else if ($value['role'] == 2) {
-					header("Location:homepage.php");
+					if ($value['status'] == 1) {
+						header("Location:homepage.php");
+					} else {
+						$ban = true;
+					}
 				} else if ($value['role'] == 3) {
-					header("Location:homepage.php");
+					if ($value['status'] == 1) {
+						header("Location:homepage.php");
+					} else {
+						$ban = true;
+					}
 				}
 				$ada = true;
 			}
 		}
 	}
-	if(!$ada){
+	if (!$ada) {
 		alert("Password / username Salah");
+	}
+	if($ban){
+		alert("Akun Telah Terbanned");
 	}
 }
 
