@@ -25,6 +25,9 @@ if (isset($_POST["btnlogout"])) {
     <!-- [if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif] -->
 </head>
 <style>
+    body{
+        background-color: black;
+    }
 
     #shell{
         width: 100%;
