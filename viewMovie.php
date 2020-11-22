@@ -1,15 +1,12 @@
 <?php
-require_once("helper.php");
-
-$db = new Connection;
-$conn = $db->getConnection();
-if (!isset($_SESSION['auth'])) {
-    header("Location:login.php");
-}
-if (isset($_POST["btnlogout"])) {
-    unset($_SESSION['auth']);
-    header("location:login.php");
-}
+    require_once("helper.php");
+    $db = new Connection;
+    $conn = $db->getConnection();
+    
+    $tes = $_GET['title'];
+    $querysearch = "SELECT * FROM movie where name_movie = '$tes'";
+    $movie = $conn->query($querysearch)->fetch_all(MYSQLI_ASSOC);
+    print_r($movie);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,20 +36,21 @@ if (isset($_POST["btnlogout"])) {
         margin: auto;
     }
 
-    .modal{
-        width: 80%;
-        background-color: rgba(34, 34, 34, 0.856);
+    .box{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 100%;
         color: rgb(245, 246, 255);
+        border: 1px solid rgba(128, 128, 128, 0.5);
         border-radius: 3px;
-        box-shadow: 0px 0px 10px 1px black;
         overflow: hidden;
     }
     .pic{
-        width: 20%;
+        width: 30%;
         float: left;
     }
     .pic img{
-        width: 120%;
+        width: 90%;
         margin-top: 10%;
         margin-bottom: 10%;
         margin-left: 5%;
@@ -61,6 +59,10 @@ if (isset($_POST["btnlogout"])) {
         width: 70%;
         margin-left: 7%;
         float: left;
+    }
+    .head{
+        font-size: 16px;
+        color: lightcyan;
     }
 </style>
 <body>
@@ -80,7 +82,7 @@ if (isset($_POST["btnlogout"])) {
             <div id="navigation">
                 <form method="post">
                     <ul>
-                        <li><a class="active" href="#">HOME</a></li>
+                        <li><a href="#">HOME</a></li>
                         <li><a href="#">NEWS</a></li>
                         <li><a href="#">IN THEATERS</a></li>
                         <li><a href="#">COMING SOON</a></li>
@@ -110,58 +112,18 @@ if (isset($_POST["btnlogout"])) {
         <div id="main">
             <div id="content">
                 <div class="box">
+                    <div class="pic">
+                        <img src="images/<?=$movie[0]['image']?>" alt="">
+                    </div>
                     <div class="head">
-                        <h2>LATEST TRAILERS</h2>
-                        <p class="text-right"><a href="#">See all</a></p>
+                        <h1><?= $movie[0]['name_movie']?> </h1>
                     </div>
                     <div id="movieid">
-                        
+                        <p>Genre : <?= $movie[0]['genre']?></p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- END PAGE SOURCE -->
-        <script src="jquery.js"></script>
-        <script>
-            $(document).ready(function() {
-                listmovie();
-                // setInterval(listmovie, 3000);
-            })
-
-            function listmovie() {
-
-                $.ajax({
-                        url: "controller.php",
-                        method: "get",
-                        data: {
-                            action: "showFilm"
-                        }
-                    })
-                    .done((data) => {
-                        const dv = $("#movieid");
-                        dv.html("");
-                        arr_movie = JSON.parse(data);
-                        arr_movie.forEach(movie => {
-                            
-                            dv.append(`
-                                <div class="modal">
-                                    <div class="pic">
-                                        <span class="play"><span class="name">${movie['nama_movie']}</span></span>
-                                        <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/${movie['image']}" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                        <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
-                                        <p>Genre : ${movie.genre}</p>
-                                        <br>
-                                        <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
-                                    </div>
-                                </div>
-
-                            `)
-                        })
-                    })
-            }
-        </script>
     </div>
 </body>
 

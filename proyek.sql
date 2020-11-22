@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2020 at 09:23 AM
+-- Generation Time: Nov 22, 2020 at 10:38 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -26,10 +26,28 @@ USE `proyek`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `detailmovie`
+--
+
+CREATE TABLE `detailmovie` (
+  `id_movie` int(11) NOT NULL,
+  `detail` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detailmovie`
+--
+
+INSERT INTO `detailmovie` (`id_movie`, `detail`) VALUES
+(1, 'aku ga tau, aku kan ikan'),
+(2, 'saya mah tidak tahu, saya kan ikan');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `movie`
 --
 
-DROP TABLE IF EXISTS `movie`;
 CREATE TABLE `movie` (
   `id_movie` int(10) NOT NULL,
   `name_movie` varchar(255) NOT NULL,
@@ -49,16 +67,38 @@ INSERT INTO `movie` (`id_movie`, `name_movie`, `genre`, `image`, `rating`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `id` int(11) NOT NULL COMMENT 'cmn buat auto increment',
+  `id_movie` int(11) NOT NULL COMMENT 'id movie yang di rate',
+  `rating` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id`, `id_movie`, `rating`) VALUES
+(1, 1, 5),
+(2, 1, 3),
+(3, 1, 5),
+(4, 1, 4),
+(5, 1, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `fullname` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(552) NOT NULL,
-  `role` int(1) NOT NULL,
+  `role` int(1) NOT NULL COMMENT '1 = admin\r\n2 = user premium\r\n3 = user biasa',
   `status` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -67,6 +107,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `fullname`, `password`, `email`, `role`, `status`) VALUES
+('a', 'a', '$2y$10$/J9i5yCehTWEpyl.gJ1Bp.Rw576ng5fcbN/kSdB80zZrDxplo6ksm', 'a', 2, 1),
 ('admin', 'admin', '$2y$10$EtuV6F6MWYDYV.9o3Qbo/.4c0X4KsrsyfpXs8cltgN0it.S56wOZC', 'admin@serverhost.co.id', 1, 1),
 ('kevin', 'Kevin Hao', '$2y$10$vWIk706qzH6TExniINxYaOyNibiI2UUnpFsIh6WA8dStQ0sy1PNvu', 'Kev@server7mail.com', 3, 0),
 ('Russel', 'Russel', '$2y$10$u/oSUsl03qj67vsQFgMtSOujcgX6iqzD1WhGb.MPwF4azlfgHLYkq', 'russ@st.co.id', 2, 1);
@@ -76,10 +117,22 @@ INSERT INTO `user` (`username`, `fullname`, `password`, `email`, `role`, `status
 --
 
 --
+-- Indexes for table `detailmovie`
+--
+ALTER TABLE `detailmovie`
+  ADD PRIMARY KEY (`id_movie`);
+
+--
 -- Indexes for table `movie`
 --
 ALTER TABLE `movie`
   ADD PRIMARY KEY (`id_movie`);
+
+--
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -96,6 +149,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `movie`
   MODIFY `id_movie` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'cmn buat auto increment', AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

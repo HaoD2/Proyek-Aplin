@@ -45,7 +45,6 @@ if (isset($_POST['login'])) {
 		alert("Akun Telah Terbanned");
 	}
 }
-
 ?>
 
 <!DOCTYPE html>
