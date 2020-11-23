@@ -3,14 +3,21 @@
     $db = new Connection;
     $conn = $db->getConnection();
     
-    $tes = $_GET['title'];
-    $querysearch = "SELECT * FROM movie where name_movie = '$tes'";
-    $querydesc = "SELECT d.detail FROM detailmovie as d,movie as m where d.id_movie = m.id_movie and m.name_movie = '$tes'";
-    $queryratingfilm = "SELECT COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
+    $querysearch = "SELECT * FROM movie";
+    $queryratingfilm = "SELECT m.id_movie,COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
     $movie = $conn->query($querysearch)->fetch_all(MYSQLI_ASSOC);
-    $synopsis = $conn->query($querydesc)->fetch_all(MYSQLI_ASSOC);
     $rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
+    echo "<pre>";
+    print_r($rating);
+    echo "</pre>";
+    echo "<pre>";
+    print_r($movie);
+    echo "</pre>";
+    foreach ($movie as $key => $value) {
+        //trakir sampe sini
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +31,7 @@
     <script type="text/javascript" src="js/jquery-func.js"></script>
     <!-- [if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif] -->
 </head>
+<script src="jquery.js"></script>
 <style>
 
     #shell{
@@ -86,10 +94,46 @@
         margin: auto;
         border: 1px solid rgba(211, 211, 211, 0.5);
     }
+
+    .poster{
+        width: 10%;
+        background-color: black;
+        height: 175px;
+        color: rgb(245, 246, 255);
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 1px black;
+        overflow: hidden;
+    }
+    .poster :hover{
+        transition: 500ms;
+        opacity: 0.8;
+    }
+    .pic{
+        position: relative;
+        float: left;
+        width: 100%;
+    }
+    .pic img{
+        position: absolute;
+        width: 100%;
+        height: 175px;
+    }
+    #tes{
+        visibility: hidden;
+        position: relative;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        color: mintcream;
+        text-align: center;
+        z-index: 1;
+
+    }
+    .poster:hover #tes{
+        visibility: visible;
+    }
 </style>
 <body>
-    <!-- START PAGE SOURCE -->
-    <div id="shell">
+<div id="shell">
         <div id="header">
             <h1 id="logo"><img src="images/logo.gif" alt=""></h1>
             <h2>hello, <?= $_SESSION['auth']['username'] ?></h2>
@@ -133,33 +177,7 @@
         </div>
         <div id="main">
             <div id="content">
-                <div class="box">
-                    <div class="pic">
-                        <img src="images/<?=$movie[0]['image']?>" alt="">
-                    </div>
-                    <div class="head">
-                        <h1><?= $movie[0]['name_movie']?> </h1>
-                    </div>
-                    <div id="movieid">
-                        <p>Genre : <?= $movie[0]['genre']?></p> <br>
-                        <p>Synopsis : <br> <?=$synopsis[0]['detail']?></p>
-                    </div>
-                    <div class="rating">Rating : <?=$rating[0]['rate']?> out of 5 From <?=$rating[0]['totals']?> Review</div> 
-                </div>
-            </div>
-        </div>
-        <div id="main">
-            <div id="content">
-                <div class="box">
-                    <!-- nyetel film disini -->
-                </div>
-            </div>
-        </div>
-        <div id="main">
-            <div id="content">
-                <div class="box">
-                    <!-- Comment Disini -->
-                </div>
+
             </div>
         </div>
         <footer>
@@ -167,5 +185,4 @@
         </footer>
     </div>
 </body>
-
 </html>
