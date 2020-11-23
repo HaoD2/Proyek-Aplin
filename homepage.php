@@ -128,7 +128,7 @@ if (isset($_POST["btnlogout"])) {
         <script>
             $(document).ready(function() {
                 listmovie();
-                // setInterval(listmovie, 3000);
+                setInterval(listmovie, 3000);
             })
 
             function listmovie() {

@@ -26,6 +26,7 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
     $namaMovie = $_POST['namemovie'];
     $genre = $_POST['genre'];
     $image = $_FILES['myfile'];
+    $desc = $_POST['description'];
     $isCheck = false;
     // Allow certain file formats
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
@@ -47,6 +48,7 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
                 if (move_uploaded_file($_FILES["myfile"]["tmp_name"], $targetFilePath)) {
                     // Insert image file name into database
                     $insert = $conn->query("INSERT into movie VALUES (null,'$namaMovie','$genre','" . $fileName . "', 0)");
+                    $insert2 = $conn->query("INSERT into detailmovie VALUES (0,'$desc')");
                     if ($insert) {
                         alert("The file " . $fileName . " has been uploaded successfully.");
                     } else {
@@ -130,6 +132,13 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
                             </div>
                             <div class="wrap-input100 ">
                                 <input class="input100" type="text" name="genre" placeholder="Genre">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div class="wrap-input100 ">
+                                <input class="input100" type="text" name="description" placeholder="Description">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-users" aria-hidden="true"></i>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2020 at 10:38 AM
+-- Generation Time: Nov 23, 2020 at 06:16 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -39,8 +39,11 @@ CREATE TABLE `detailmovie` (
 --
 
 INSERT INTO `detailmovie` (`id_movie`, `detail`) VALUES
-(1, 'aku ga tau, aku kan ikan'),
-(2, 'saya mah tidak tahu, saya kan ikan');
+(1, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.'),
+(2, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.'),
+(3, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.'),
+(4, 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem excepturi nihil ducimus eligendi sed corporis voluptatibus earum fuga numquam provident. Repellendus atque placeat magnam quam mollitia repudiandae quis quaerat? Tempore!'),
+(5, 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem excepturi nihil ducimus eligendi sed corporis voluptatibus earum fuga numquam provident. Repellendus atque placeat magnam quam mollitia repudiandae quis quaerat? Tempore!');
 
 -- --------------------------------------------------------
 
@@ -62,7 +65,10 @@ CREATE TABLE `movie` (
 
 INSERT INTO `movie` (`id_movie`, `name_movie`, `genre`, `image`, `rating`) VALUES
 (1, 'Sandy Adventure', 'Adventure', 'sandy.png', 0),
-(2, 'Spongebo The Movie', 'Fun', 'quot-the-spongebob-movie-sponge-on-the-run-quot-misi-spongebob-selamatkan-gary-yang-diculik-plankton.jpg', 0);
+(2, 'Spongebo The Movie', 'Fun', 'quot-the-spongebob-movie-sponge-on-the-run-quot-misi-spongebob-selamatkan-gary-yang-diculik-plankton.jpg', 0),
+(3, 'tess', 'Adventure', 'bg.jpg', 0),
+(4, 'q', 'q', 'bg.jpg', 0),
+(5, 'qq', 'qq', 'bg.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -145,10 +151,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `detailmovie`
+--
+ALTER TABLE `detailmovie`
+  MODIFY `id_movie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `movie`
 --
 ALTER TABLE `movie`
-  MODIFY `id_movie` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_movie` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `review`
