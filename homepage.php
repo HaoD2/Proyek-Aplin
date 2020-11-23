@@ -73,6 +73,7 @@ if (isset($_POST["btnlogout"])) {
             <h1 id="logo"><img src="images/logo.gif" alt=""></h1>
             <h2>hello, <?= $_SESSION['auth']['username'] ?></h2>
             <div class="social"> <span>FOLLOW US ON:</span>
+            <img src="images/social.gif" alt="">
                 <ul>
                     <li><a class="twitter" href="#">twitter</a></li>
                     <li><a class="facebook" href="#">facebook</a></li>
