@@ -241,8 +241,7 @@ $rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
                     text-align: center;
                 }
 
-                h1,
-                h2 {
+                h1{
                     color: #888;
                     margin: 0;
                     font-weight: normal;
@@ -253,33 +252,12 @@ $rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
                     padding-bottom: 2em;
                 }
 
-                h2 {
-                    clear: both;
-                    color: #aaa;
-                    padding: 2em 0 0.3em
-                }
-
                 em {
                     display: block;
                     margin: .5em auto 2em;
                     color: #bbb;
                 }
 
-                p,
-                p a {
-                    color: #aaa;
-                    text-decoration: none;
-                }
-
-                p a:hover,
-                p a:focus {
-                    text-decoration: underline;
-                }
-
-                p+p {
-                    color: #bbb;
-                    margin-top: 2em;
-                }
 
                 .detail {
                     position: absolute;

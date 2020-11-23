@@ -89,6 +89,7 @@ if (isset($_POST["btnlogout"])) {
                         <li><a href="#">COMING SOON</a></li>
                         <li><a href="#">CONTACT</a></li>
                         <li><a href="#">ADVERTISE</a></li>
+                        <li><a href="history.php">HISTORY</a></li>
                         <!-- belum berfungsi -->
                         <input type="submit" name="btnlogout" value="Logout" style="background-color: black; color: white;margin-left: 50px;">
                     </ul>
