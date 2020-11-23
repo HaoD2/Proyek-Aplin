@@ -208,6 +208,14 @@ $rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
                             border: 1px solid #F2F2F2;
                             color: black;
                         }
+
+                        .btn {
+                            color: black;
+                        }
+
+                        .btn:hover {
+                            color: white;
+                        }
                     </style>
                 </div>
             </div>
