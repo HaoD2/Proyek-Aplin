@@ -80,7 +80,7 @@ if (isset($_POST["btnlogout"])) {
                     <li><a class="rss" href="#">rss</a></li>
                 </ul>
             </div>
-            <div id="navigation">
+            <div id="navigation" style="margin-right: 100px;">
                 <form method="post">
                     <ul>
                         <li><a class="active" href="#">HOME</a></li>
@@ -90,7 +90,7 @@ if (isset($_POST["btnlogout"])) {
                         <li><a href="#">CONTACT</a></li>
                         <li><a href="#">ADVERTISE</a></li>
                         <!-- belum berfungsi -->
-                        <input type="submit" name="btnlogout" value="Logout">
+                        <input type="submit" name="btnlogout" value="Logout" style="background-color: black; color: white;margin-left: 50px;">
                     </ul>
                 </form>
             </div>
