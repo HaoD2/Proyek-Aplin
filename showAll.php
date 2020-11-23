@@ -1,21 +1,19 @@
 <?php
-    require_once("helper.php");
-    $db = new Connection;
-    $conn = $db->getConnection();
-    
-    $querysearch = "SELECT * FROM movie";
-    $queryratingfilm = "SELECT m.id_movie,COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
-    $movie = $conn->query($querysearch)->fetch_all(MYSQLI_ASSOC);
-    $rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
-    echo "<pre>";
-    print_r($rating);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($movie);
-    echo "</pre>";
-    foreach ($movie as $key => $value) {
-        //trakir sampe sini
-    }
+require_once("helper.php");
+$db = new Connection;
+$conn = $db->getConnection();
+
+$querysearch = "SELECT * FROM movie";
+$queryratingfilm = "SELECT m.id_movie,COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
+$movie = $conn->query($querysearch)->fetch_all(MYSQLI_ASSOC);
+//$rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
+echo "<pre>";
+//print_r($rating);
+echo "</pre>";
+echo "<pre>";
+//print_r($movie);
+echo "</pre>";
+
 ?>
 
 <!DOCTYPE html>
@@ -33,21 +31,26 @@
 </head>
 <script src="jquery.js"></script>
 <style>
+    body {
+        background-color: black;
+    }
 
-    #shell{
+    #shell {
         width: 100%;
         background-color: black;
     }
-    #header{
-        width: 90%;
-        margin: auto;
-    }
-    #main{
+
+    #header {
         width: 90%;
         margin: auto;
     }
 
-    .box{
+    #main {
+        width: 90%;
+        margin: auto;
+    }
+
+    .box {
         margin-top: 5px;
         margin-bottom: 5px;
         width: 100%;
@@ -57,37 +60,44 @@
         overflow: hidden;
         padding-bottom: 0.5%;
     }
-    .pic{
+
+    .pic {
         width: 30%;
         float: left;
     }
-    .pic img{
+
+    .pic img {
         width: 90%;
         margin-top: 10%;
         margin-bottom: 5%;
         margin-left: 5%;
     }
-    .desc{
+
+    .desc {
         width: 70%;
         margin-left: 7%;
         float: left;
     }
-    .head{
+
+    .head {
         font-size: 16px;
         color: lightcyan;
     }
-    #movieid{
+
+    #movieid {
         font-size: 16px;
         color: lightcyan;
     }
-    .rating{
+
+    .rating {
         margin: 0%;
         width: 100%;
         margin-left: 1.5%;
         font-size: 16px;
-        color:  rgb(243, 243, 71);
+        color: rgb(243, 243, 71);
     }
-    footer{
+
+    footer {
         width: 100%;
         padding-top: 2.5%;
         padding-bottom: 2.5%;
@@ -95,7 +105,7 @@
         border: 1px solid rgba(211, 211, 211, 0.5);
     }
 
-    .poster{
+    .poster {
         width: 10%;
         background-color: black;
         height: 175px;
@@ -104,21 +114,25 @@
         box-shadow: 0px 0px 10px 1px black;
         overflow: hidden;
     }
-    .poster :hover{
+
+    .poster :hover {
         transition: 500ms;
         opacity: 0.8;
     }
-    .pic{
+
+    .pic {
         position: relative;
         float: left;
         width: 100%;
     }
-    .pic img{
+
+    .pic img {
         position: absolute;
         width: 100%;
         height: 175px;
     }
-    #tes{
+
+    #tes {
         visibility: hidden;
         position: relative;
         margin-top: 5px;
@@ -128,12 +142,14 @@
         z-index: 1;
 
     }
-    .poster:hover #tes{
+
+    .poster:hover #tes {
         visibility: visible;
     }
 </style>
+
 <body>
-<div id="shell">
+    <div id="shell">
         <div id="header">
             <h1 id="logo"><img src="images/logo.gif" alt=""></h1>
             <h2>hello, <?= $_SESSION['auth']['username'] ?></h2>
@@ -177,12 +193,31 @@
         </div>
         <div id="main">
             <div id="content">
+                <!-- <div class="box"> -->
+                    <div id="movieid">
+                        <?php
+                        foreach ($movie as $value) {
+                            //trakir sampe sini
 
+                        ?>
+                            <div class="modal">
+                                <div class="pic">
+                                    <span class="play"><span class="name"><?= $value["name_movie"] ?></span></span>
+                                    <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/<?= $value["image"] ?>" alt="" /></a>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                <!-- </div> -->
             </div>
         </div>
-        <footer>
-            <p style="text-align: center;">&copy;Pemrograman Web</p>
-        </footer>
+    </div>
+    <footer>
+        <p style="text-align: center;">&copy;Pemrograman Web</p>
+    </footer>
     </div>
 </body>
+
 </html>

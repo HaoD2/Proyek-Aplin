@@ -115,7 +115,7 @@ if (isset($_POST["btnlogout"])) {
                 <div class="box">
                     <div class="head">
                         <h2>LATEST TRAILERS</h2>
-                        <p class="text-right"><a href="#">See all</a></p>
+                        <p class="text-right"><a href="showAll.php">See all</a></p>
                     </div>
                     <div id="movieid">
                         
@@ -128,7 +128,7 @@ if (isset($_POST["btnlogout"])) {
         <script>
             $(document).ready(function() {
                 listmovie();
-                setInterval(listmovie, 3000);
+                // setInterval(listmovie, 3000);
             })
 
             function listmovie() {
