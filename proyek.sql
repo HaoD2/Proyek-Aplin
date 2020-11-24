@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2020 at 09:00 AM
+-- Generation Time: Nov 24, 2020 at 03:20 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -22,6 +22,28 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `proyek` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `proyek`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL,
+  `id_movie` int(11) NOT NULL,
+  `username` varchar(12) NOT NULL,
+  `comment` text NOT NULL,
+  `timestamp` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`id`, `id_movie`, `username`, `comment`, `timestamp`) VALUES
+(4, 1, 'a', 'aselole', '24 Nov 20 at 09:15'),
+(5, 1, 'a', 'anjay mabar', '24 Nov 20 at 09:19');
 
 -- --------------------------------------------------------
 
@@ -99,19 +121,16 @@ INSERT INTO `movie` (`id_movie`, `name_movie`, `genre`, `image`, `rating`) VALUE
 CREATE TABLE `review` (
   `id` int(11) NOT NULL COMMENT 'cmn buat auto increment',
   `id_movie` int(11) NOT NULL COMMENT 'id movie yang di rate',
-  `rating` int(11) NOT NULL
+  `rating` int(11) NOT NULL,
+  `username` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `review`
 --
 
-INSERT INTO `review` (`id`, `id_movie`, `rating`) VALUES
-(1, 1, 5),
-(2, 1, 3),
-(3, 1, 5),
-(4, 1, 4),
-(5, 1, 2);
+INSERT INTO `review` (`id`, `id_movie`, `rating`, `username`) VALUES
+(8, 1, 4, 'a');
 
 -- --------------------------------------------------------
 
@@ -141,6 +160,12 @@ INSERT INTO `user` (`username`, `fullname`, `password`, `email`, `role`, `status
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `detailmovie`
@@ -177,6 +202,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `detailmovie`
 --
 ALTER TABLE `detailmovie`
@@ -198,7 +229,7 @@ ALTER TABLE `movie`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'cmn buat auto increment', AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'cmn buat auto increment', AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
