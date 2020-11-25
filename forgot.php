@@ -9,12 +9,13 @@
     }
 
     if(isset($_POST["changeps"])){
+        //$password = $_POST["npass"];
         if($_POST["npass"]!="" && $_POST["cpass"]!=""){
             if($_POST["npass"]==$_POST["cpass"]){
                 $password = password_hash($_REQUEST["npass"],PASSWORD_DEFAULT);
-                // $password = $_POST["pass"];
-                $temp = $_POST["temp"];
-                $query = "UPDATE user SET `password`='$password' WHERE (username = '$temp' OR email = '$temp')";
+
+                $temp = $_POST["user"];
+                $query = "UPDATE user SET `user`.`password`='$password' WHERE (`user`.username = '$temp' OR `user`.email = '$temp')";
                 $res = $conn->query($query);
 
                 if($res){
