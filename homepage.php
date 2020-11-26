@@ -103,16 +103,16 @@ if (isset($_POST["btnlogout"])) {
             </div>
             <div id="sub-navigation">
                 <ul>
-                    <li><a href="#">SHOW ALL</a></li>
-                    <li><a href="#">LATEST TRAILERS</a></li>
-                    <li><a href="#">TOP RATED</a></li>
-                    <li><a href="#">MOST COMMENTED</a></li>
+                    <li><a href="">SHOW ALL</a></li>
+                    <li><a href="">LATEST TRAILERS</a></li>
+                    <li><a href="">TOP RATED</a></li>
+                    <li><a href="">MOST COMMENTED</a></li>
                 </ul>
                 <div id="search">
-                    <form action="#" method="get" accept-charset="utf-8">
+                    <form method="get" accept-charset="utf-8">
                         <label for="search-field">SEARCH</label>
                         <input type="text" name="search field" placeholder="Enter search here" id="search-field" class="blink search-field" />
-                        <input type="submit" value="GO!" class="search-button" onclick="sortFilm()" />
+                        <input type="button" value="GO!" class="search-button" onclick="sortFilm()">
                     </form>
                 </div>
             </div>
@@ -134,8 +134,9 @@ if (isset($_POST["btnlogout"])) {
         <script src="jquery.js"></script>
         <script>
             $(document).ready(function() {
-                listmovie();
+                sortFilm();
                 // setInterval(listmovie, 3000);
+
             })
 
             function listmovie() {
@@ -145,6 +146,42 @@ if (isset($_POST["btnlogout"])) {
                         method: "get",
                         data: {
                             action: "showFilm"
+                        }
+                    })
+                    .done((data) => {
+
+                        const dv = $("#movieid");
+                        dv.html("");
+                        arr_movie = JSON.parse(data);
+                        arr_movie.forEach(movie => {
+
+                            dv.append(`
+                                <div class="modal">
+                                    <div class="pic">
+                                        <span class="play"><span class="name">${movie['nama_movie']}</span></span>
+                                        <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/${movie['image']}" alt="" /></a>
+                                    </div>
+                                    <div class="desc">
+                                        <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
+                                        <p>Genre : ${movie.genre}</p>
+                                        <br>
+                                        <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
+                                    </div>
+                                </div>
+
+                            `)
+                        })
+                    })
+            }
+
+
+            function sortFilm() {
+                $.ajax({
+                        url: "controller.php",
+                        method: "post",
+                        data: {
+                            action: "sortfilm",
+                            nameMV: $("#search-field").val(),
                         }
                     })
                     .done((data) => {
@@ -171,41 +208,6 @@ if (isset($_POST["btnlogout"])) {
                         })
                     })
             }
-            // Fix yang ini bang jago //
-            
-            // function sortFilm() {
-            //     $.ajax({
-            //         url: "controller.php",
-            //         method: "post",
-            //         data: {
-            //             action: "sortfilm",
-            //             nameMV: nameMV
-            //         }
-            //         .done((data) => {
-            //             const dv = $("#movieid");
-            //             dv.html("");
-            //             arr_movie = JSON.parse(data);
-            //             arr_movie.forEach(movie => {
-
-            //                 dv.append(`
-            //                     <div class="modal">
-            //                         <div class="pic">
-            //                             <span class="play"><span class="name">${movie['nama_movie']}</span></span>
-            //                             <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/${movie['image']}" alt="" /></a>
-            //                         </div>
-            //                         <div class="desc">
-            //                             <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
-            //                             <p>Genre : ${movie.genre}</p>
-            //                             <br>
-            //                             <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
-            //                         </div>
-            //                     </div>
-
-            //                 `)
-            //             })
-            //         })
-            //     })
-            // }
         </script>
     </div>
 </body>
