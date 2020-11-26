@@ -245,10 +245,7 @@ $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
                         <li><a href="homepage.php">HOME</a></li>
                         <li><a href="#">NEWS</a></li>
                         <li><a href="#">IN THEATERS</a></li>
-                        <li><a href="#">COMING SOON</a></li>
                         <li><a href="#">CONTACT</a></li>
-                        <li><a href="#">ADVERTISE</a></li>
-                        <!-- belum berfungsi -->
                         <li><a href="login.php">LOGOUT</a></li>
                     </ul>
                 </form>
