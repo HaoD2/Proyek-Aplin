@@ -25,24 +25,26 @@ if (isset($_POST["btnlogout"])) {
     <!-- [if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif] -->
 </head>
 <style>
-    body{
+    body {
         background-color: black;
     }
 
-    #shell{
+    #shell {
         width: 100%;
         background-color: black;
     }
-    #header{
-        width: 90%;
-        margin: auto;
-    }
-    #main{
+
+    #header {
         width: 90%;
         margin: auto;
     }
 
-    .modal{
+    #main {
+        width: 90%;
+        margin: auto;
+    }
+
+    .modal {
         width: 80%;
         background-color: rgba(34, 34, 34, 0.856);
         color: rgb(245, 246, 255);
@@ -50,22 +52,26 @@ if (isset($_POST["btnlogout"])) {
         box-shadow: 0px 0px 10px 1px black;
         overflow: hidden;
     }
-    .pic{
+
+    .pic {
         width: 20%;
         float: left;
     }
-    .pic img{
+
+    .pic img {
         width: 120%;
         margin-top: 10%;
         margin-bottom: 10%;
         margin-left: 5%;
     }
-    .desc{
+
+    .desc {
         width: 70%;
         margin-left: 7%;
         float: left;
     }
 </style>
+
 <body>
     <!-- START PAGE SOURCE -->
     <div id="shell">
@@ -73,7 +79,7 @@ if (isset($_POST["btnlogout"])) {
             <h1 id="logo"><img src="images/logo.gif" alt=""></h1>
             <h2>hello, <?= $_SESSION['auth']['username'] ?></h2>
             <div class="social"> <span>FOLLOW US ON:</span>
-            <img src="images/social.gif" alt="">
+                <img src="images/social.gif" alt="">
                 <ul>
                     <li><a class="twitter" href="#">twitter</a></li>
                     <li><a class="facebook" href="#">facebook</a></li>
@@ -106,7 +112,7 @@ if (isset($_POST["btnlogout"])) {
                     <form action="#" method="get" accept-charset="utf-8">
                         <label for="search-field">SEARCH</label>
                         <input type="text" name="search field" placeholder="Enter search here" id="search-field" class="blink search-field" />
-                        <input type="submit" value="GO!" class="search-button" />
+                        <input type="submit" value="GO!" class="search-button" onclick="sortFilm()" />
                     </form>
                 </div>
             </div>
@@ -119,7 +125,7 @@ if (isset($_POST["btnlogout"])) {
                         <p class="text-right"><a href="showAll.php">See all</a></p>
                     </div>
                     <div id="movieid">
-                        
+
                     </div>
                 </div>
             </div>
@@ -146,7 +152,7 @@ if (isset($_POST["btnlogout"])) {
                         dv.html("");
                         arr_movie = JSON.parse(data);
                         arr_movie.forEach(movie => {
-                            
+
                             dv.append(`
                                 <div class="modal">
                                     <div class="pic">
@@ -165,6 +171,41 @@ if (isset($_POST["btnlogout"])) {
                         })
                     })
             }
+            // Fix yang ini bang jago //
+            
+            // function sortFilm() {
+            //     $.ajax({
+            //         url: "controller.php",
+            //         method: "post",
+            //         data: {
+            //             action: "sortfilm",
+            //             nameMV: nameMV
+            //         }
+            //         .done((data) => {
+            //             const dv = $("#movieid");
+            //             dv.html("");
+            //             arr_movie = JSON.parse(data);
+            //             arr_movie.forEach(movie => {
+
+            //                 dv.append(`
+            //                     <div class="modal">
+            //                         <div class="pic">
+            //                             <span class="play"><span class="name">${movie['nama_movie']}</span></span>
+            //                             <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/${movie['image']}" alt="" /></a>
+            //                         </div>
+            //                         <div class="desc">
+            //                             <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
+            //                             <p>Genre : ${movie.genre}</p>
+            //                             <br>
+            //                             <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
+            //                         </div>
+            //                     </div>
+
+            //                 `)
+            //             })
+            //         })
+            //     })
+            // }
         </script>
     </div>
 </body>
