@@ -14,7 +14,6 @@
         <source src="Dota 2 2020.08.17 - 14.32.20.01_Trim.mp4" type="video/mp4">
     </video>
 
-
     <script src="video.min.js"></script>
     <script src="https://cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js"></script>
     <script src="videojs-resolution-switcher.js"></script>
