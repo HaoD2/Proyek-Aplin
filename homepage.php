@@ -70,6 +70,32 @@ if (isset($_POST["btnlogout"])) {
         margin-left: 7%;
         float: left;
     }
+    #subhead{
+        border: 0px solid black;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        padding-top: 3px;
+    }
+    #subhead:hover{
+        color: red;
+    }
+    #logout{
+        background-color: black;
+        color: white;
+        margin-left: 29px;
+        border: 1px solid black;
+        font-size: 14px;
+        font-weight: bolder;
+    }
+    #logout:hover{
+        cursor: pointer;
+        color: red;
+    }
+    #search123:hover{
+        cursor: pointer;
+        color: red;
+    }
 </style>
 
 <body>
@@ -95,22 +121,22 @@ if (isset($_POST["btnlogout"])) {
                         <li><a href="#">IN THEATERS</a></li>
                         <li><a href="contact.php">CONTACT</a></li>
                         <li><a href="history.php">HISTORY</a></li>
-                        <input type="submit" name="btnlogout" value="Logout" style="background-color: black; color: white;margin-left: 50px;">
+                        <input type="submit" id="logout" name="btnlogout" value="LOGOUT">
                     </ul>
                 </form>
             </div>
             <div id="sub-navigation">
                 <ul>
-                    <li><a href="">SHOW ALL</a></li>
-                    <li><a href="">LATEST TRAILERS</a></li>
-                    <li><a href="">TOP RATED</a></li>
-                    <li><a href="">MOST COMMENTED</a></li>
+                    <li><button id="subhead" onclick="showAll()" >SHOW ALL</a></li>
+                    <li><button id="subhead" onclick="latestTrailer()">LATEST TRAILERS</a></li>
+                    <li><button id="subhead" onclick="topRated()">TOP RATED</a></li>
+                    <li><button id="subhead" onclick="mostCommented()">MOST COMMENTED</a></li>
                 </ul>
                 <div id="search">
                     <form method="get" accept-charset="utf-8">
                         <label for="search-field">SEARCH</label>
                         <input type="text" name="search field" placeholder="Enter search here" id="search-field" class="blink search-field" />
-                        <input type="button" value="GO!" class="search-button" onclick="sortFilm()">
+                        <input type="button" value="GO!" class="search-button" id="search123" onclick="sortFilm()">
                     </form>
                 </div>
             </div>
@@ -119,11 +145,10 @@ if (isset($_POST["btnlogout"])) {
             <div id="content">
                 <div class="box">
                     <div class="head">
-                        <h2>LATEST TRAILERS</h2>
-                        <p class="text-right"><a href="showAll.php">See all</a></p>
+                        
                     </div>
                     <div id="movieid">
-
+                        <!-- KONTEN DISINI -->
                     </div>
                 </div>
             </div>
@@ -131,14 +156,53 @@ if (isset($_POST["btnlogout"])) {
         <!-- END PAGE SOURCE -->
         <script src="jquery.js"></script>
         <script>
+            function showAll(){
+                listmovie();
+            }
+            function latestTrailer(){
+                listTrailer();
+            }
+            function topRated(){
+                
+            }
+            function mostCommented(){
+            
+            }
+            
             $(document).ready(function() {
                 sortFilm();
-                // setInterval(listmovie, 3000);
+                // setInterval(sortFilm(), 3000);
 
             })
 
-            function listmovie() {
+            function listTrailer(){
+                const dv = $("#movieid");
+                dv.html("");
+                $.ajax({
+                        url: "trailer.php",
+                        success: function(result){
+                            arr_trailer = JSON.parse(result);
+                            arr_trailer.forEach(trailer => {
+                                dv.append(`
+                                <div class="modal">
+                                    <div class="pic">
+                                        <span class="play"><span class="name">${trailer.nama_trailer}</span></span>
+                                        <a href="viewMovie.php?title=${trailer.nama_trailer}"><img src="" alt="" /></a>
+                                    </div>
+                                    <div class="desc">
+                                        <h1 style="font-size: 18px;margin-top: 10px;">${trailer.nama_trailer}</h1>
+                                        <br>
+                                        <p style="margin-bottom: 10px">${trailer.desc_trailer}</p>
+                                    </div>
+                                </div>
 
+                            `)
+                            })
+                        }
+                });
+            }
+
+            function listmovie() {
                 $.ajax({
                         url: "controller.php",
                         method: "get",
@@ -174,37 +238,39 @@ if (isset($_POST["btnlogout"])) {
 
 
             function sortFilm() {
-                $.ajax({
-                        url: "controller.php",
-                        method: "post",
-                        data: {
-                            action: "sortfilm",
-                            nameMV: $("#search-field").val(),
-                        }
-                    })
-                    .done((data) => {
-                        const dv = $("#movieid");
-                        dv.html("");
-                        arr_movie = JSON.parse(data);
-                        arr_movie.forEach(movie => {
 
-                            dv.append(`
-                                <div class="modal">
-                                    <div class="pic">
-                                        <span class="play"><span class="name">${movie['nama_movie']}</span></span>
-                                        <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/${movie['image']}" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                        <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
-                                        <p>Genre : ${movie.genre}</p>
-                                        <br>
-                                        <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
-                                    </div>
+            $.ajax({
+                    url: "controller.php",
+                    method: "post",
+                    data: {
+                        action: "sortfilm",
+                        nameMV: $("#search-field").val(),
+                    }
+                })
+                .done((data) => {
+                    const dv = $("#movieid");
+                    dv.html("");
+                    arr_movie = JSON.parse(data);
+                    arr_movie.forEach(movie => {
+
+                        dv.append(`
+                            <div class="modal">
+                                <div class="pic">
+                                    <span class="play"><span class="name">${movie['nama_movie']}</span></span>
+                                    <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/${movie['image']}" alt="" /></a>
                                 </div>
+                                <div class="desc">
+                                    <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
+                                    <p>Genre : ${movie.genre}</p>
+                                    <br>
+                                    <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
+                                </div>
+                            </div>
 
-                            `)
-                        })
+                        `)
                     })
+                    $('#search-field').val("");
+                })
             }
         </script>
     </div>
