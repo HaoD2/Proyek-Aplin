@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2020 at 01:36 PM
+-- Generation Time: Nov 24, 2020 at 03:20 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -61,7 +61,7 @@ CREATE TABLE `detailmovie` (
 --
 
 INSERT INTO `detailmovie` (`id_movie`, `detail`) VALUES
-(1, 'jangan bercanda dengan saya kamu!'),
+(1, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.'),
 (2, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.'),
 (3, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.'),
 (4, 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem excepturi nihil ducimus eligendi sed corporis voluptatibus earum fuga numquam provident. Repellendus atque placeat magnam quam mollitia repudiandae quis quaerat? Tempore!'),
@@ -115,19 +115,6 @@ INSERT INTO `movie` (`id_movie`, `name_movie`, `genre`, `image`, `rating`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `news`
---
-
-CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
-  `head_news` varchar(225) NOT NULL,
-  `detail_news` text NOT NULL,
-  `timestamp` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `review`
 --
 
@@ -143,27 +130,7 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`id`, `id_movie`, `rating`, `username`) VALUES
-(8, 1, 5, 'a');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `trailer`
---
-
-CREATE TABLE `trailer` (
-  `id` int(11) NOT NULL,
-  `nama_trailer` varchar(225) NOT NULL,
-  `desc_trailer` text NOT NULL,
-  `images` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `trailer`
---
-
-INSERT INTO `trailer` (`id`, `nama_trailer`, `desc_trailer`, `images`) VALUES
-(0, 'Avengers : S', 'ini bukan avengers endgame', 'sandy.jpg');
+(8, 1, 4, 'a');
 
 -- --------------------------------------------------------
 
@@ -222,12 +189,6 @@ ALTER TABLE `movie`
 -- Indexes for table `review`
 --
 ALTER TABLE `review`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `trailer`
---
-ALTER TABLE `trailer`
   ADD PRIMARY KEY (`id`);
 
 --

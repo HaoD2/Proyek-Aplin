@@ -70,28 +70,6 @@ if (isset($_POST["btnlogout"])) {
         margin-left: 7%;
         float: left;
     }
-    #subhead{
-        border: 0px solid black;
-        background-color: black;
-        color: white;
-        font-weight: bold;
-        padding-top: 3px;
-    }
-    #subhead:hover{
-        color: red;
-    }
-    #logout{
-        background-color: black;
-        color: white;
-        margin-left: 29px;
-        border: 1px solid black;
-        font-size: 14px;
-        font-weight: bolder;
-    }
-    #logout:hover{
-        cursor: pointer;
-        color: red;
-    }
 </style>
 
 <body>
@@ -117,16 +95,16 @@ if (isset($_POST["btnlogout"])) {
                         <li><a href="#">IN THEATERS</a></li>
                         <li><a href="contact.php">CONTACT</a></li>
                         <li><a href="history.php">HISTORY</a></li>
-                        <input type="submit" id="logout" name="btnlogout" value="LOGOUT">
+                        <input type="submit" name="btnlogout" value="Logout" style="background-color: black; color: white;margin-left: 50px;">
                     </ul>
                 </form>
             </div>
             <div id="sub-navigation">
                 <ul>
-                    <li><button id="subhead" onclick="showAll()" >SHOW ALL</a></li>
-                    <li><button id="subhead" onclick="latestTrailer()">LATEST TRAILERS</a></li>
-                    <li><button id="subhead" onclick="topRated()">TOP RATED</a></li>
-                    <li><button id="subhead" onclick="mostCommented()">MOST COMMENTED</a></li>
+                    <li><a href="">SHOW ALL</a></li>
+                    <li><a href="">LATEST TRAILERS</a></li>
+                    <li><a href="">TOP RATED</a></li>
+                    <li><a href="">MOST COMMENTED</a></li>
                 </ul>
                 <div id="search">
                     <form method="get" accept-charset="utf-8">
@@ -141,10 +119,11 @@ if (isset($_POST["btnlogout"])) {
             <div id="content">
                 <div class="box">
                     <div class="head">
-                        
+                        <h2>LATEST TRAILERS</h2>
+                        <p class="text-right"><a href="showAll.php">See all</a></p>
                     </div>
                     <div id="movieid">
-                        <!-- KONTEN DISINI -->
+
                     </div>
                 </div>
             </div>
@@ -152,51 +131,47 @@ if (isset($_POST["btnlogout"])) {
         <!-- END PAGE SOURCE -->
         <script src="jquery.js"></script>
         <script>
-            function showAll(){
-                sortFilm();
-            }
-            function latestTrailer(){
-                listTrailer();
-            }
-            function topRated(){
-                
-            }
-            function mostCommented(){
-            
-            }
-            
             $(document).ready(function() {
                 sortFilm();
-                // setInterval(sortFilm(), 3000);
+                // setInterval(listmovie, 3000);
 
             })
 
-            function listTrailer(){
-                const dv = $("#movieid");
-                dv.html("");
+            function listmovie() {
+
                 $.ajax({
-                        url: "trailer.php",
-                        success: function(result){
-                            arr_trailer = JSON.parse(result);
-                            arr_trailer.forEach(trailer => {
-                                dv.append(`
+                        url: "controller.php",
+                        method: "get",
+                        data: {
+                            action: "showFilm"
+                        }
+                    })
+                    .done((data) => {
+
+                        const dv = $("#movieid");
+                        dv.html("");
+                        arr_movie = JSON.parse(data);
+                        arr_movie.forEach(movie => {
+
+                            dv.append(`
                                 <div class="modal">
                                     <div class="pic">
-                                        <span class="play"><span class="name">${trailer.nama_trailer}</span></span>
-                                        <a href="viewMovie.php?title=${trailer.nama_trailer}"><img src="" alt="" /></a>
+                                        <span class="play"><span class="name">${movie['nama_movie']}</span></span>
+                                        <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/${movie['image']}" alt="" /></a>
                                     </div>
                                     <div class="desc">
-                                        <h1 style="font-size: 18px;margin-top: 10px;">${trailer.nama_trailer}</h1>
+                                        <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
+                                        <p>Genre : ${movie.genre}</p>
                                         <br>
-                                        <p style="margin-bottom: 10px">${trailer.desc_trailer}</p>
+                                        <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
                                     </div>
                                 </div>
 
                             `)
-                            })
-                        }
-                });
+                        })
+                    })
             }
+
 
             function sortFilm() {
                 $.ajax({
@@ -223,7 +198,7 @@ if (isset($_POST["btnlogout"])) {
                                         <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
                                         <p>Genre : ${movie.genre}</p>
                                         <br>
-                                        <p style="margin-bottom: 10px">${movie.detail}</p>
+                                        <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
                                     </div>
                                 </div>
 
