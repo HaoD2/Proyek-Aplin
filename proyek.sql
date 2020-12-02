@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2020 at 01:36 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Generation Time: Dec 02, 2020 at 06:13 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -125,6 +126,13 @@ CREATE TABLE `news` (
   `timestamp` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `head_news`, `detail_news`, `timestamp`) VALUES
+(0, 'dummy', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.', '02-12-2020');
+
 -- --------------------------------------------------------
 
 --
@@ -163,7 +171,7 @@ CREATE TABLE `trailer` (
 --
 
 INSERT INTO `trailer` (`id`, `nama_trailer`, `desc_trailer`, `images`) VALUES
-(0, 'Avengers : S', 'ini bukan avengers endgame', 'sandy.jpg');
+(0, 'Avengers : S', 'ini bukan avengers endgame', 'sandy.jgp');
 
 -- --------------------------------------------------------
 
@@ -188,7 +196,8 @@ INSERT INTO `user` (`username`, `fullname`, `password`, `email`, `role`, `status
 ('a', 'a', '$2y$10$/J9i5yCehTWEpyl.gJ1Bp.Rw576ng5fcbN/kSdB80zZrDxplo6ksm', 'a', 2, 1),
 ('admin', 'admin', '$2y$10$EtuV6F6MWYDYV.9o3Qbo/.4c0X4KsrsyfpXs8cltgN0it.S56wOZC', 'admin@serverhost.co.id', 1, 0),
 ('kevin', 'Kevin Hao', '$2y$10$vWIk706qzH6TExniINxYaOyNibiI2UUnpFsIh6WA8dStQ0sy1PNvu', 'Kev@server7mail.com', 3, 0),
-('Russel', 'Russel', '$2y$10$u/oSUsl03qj67vsQFgMtSOujcgX6iqzD1WhGb.MPwF4azlfgHLYkq', 'russ@st.co.id', 2, 1);
+('Russel', 'Russel', '$2y$10$u/oSUsl03qj67vsQFgMtSOujcgX6iqzD1WhGb.MPwF4azlfgHLYkq', 'russ@st.co.id', 2, 1),
+('owen', 'kevin owen', '$2y$10$Nxc04feR0pXm9ykJUGiVueqROS6BC/3Qw0vu.76dd0KCJ.qnsweCe', 'kevinowen05@gmail.com', 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -229,46 +238,6 @@ ALTER TABLE `review`
 --
 ALTER TABLE `trailer`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `comment`
---
-ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `detailmovie`
---
-ALTER TABLE `detailmovie`
-  MODIFY `id_movie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `history`
---
-ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `movie`
---
-ALTER TABLE `movie`
-  MODIFY `id_movie` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `review`
---
-ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'cmn buat auto increment', AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
