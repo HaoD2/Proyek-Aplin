@@ -19,3 +19,10 @@ if($_REQUEST["action"] == "sortfilm"){
     $json_datas = json_encode($movie);
     echo $json_datas;
 }
+
+if($_REQUEST["action"] == "showNews"){
+    $querydesc = "SELECT * FROM news";
+    $news = $conn->query($querydesc)->fetch_all(MYSQLI_ASSOC);
+    $json_datas = json_encode($news);
+    echo $json_datas;
+}

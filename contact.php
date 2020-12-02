@@ -72,7 +72,7 @@ if (isset($_POST["btnlogout"])) {
             <form method="post">
                 <ul>
                     <li><a href="homepage.php">HOME</a></li>
-                    <li><a href="#">NEWS</a></li>
+                    <li><a href="news.php">NEWS</a></li>
                     <li><a href="#">IN THEATERS</a></li>
                     <li><a href="#">COMING SOON</a></li>
                     <li><a class="active" href="#">CONTACT</a></li>
