@@ -118,8 +118,6 @@ if (isset($_POST["btnlogout"])) {
                     <ul>
                         <li><a class="active" href="#">HOME</a></li>
                         <li><a href="news.php">NEWS</a></li>
-                        <li><a href="#">IN THEATERS</a></li>
-                        <li><a href="contact.php">CONTACT</a></li>
                         <li><a href="history.php">HISTORY</a></li>
                         <input type="submit" id="logout" name="btnlogout" value="LOGOUT">
                     </ul>
@@ -129,8 +127,8 @@ if (isset($_POST["btnlogout"])) {
                 <ul>
                     <li><button id="subhead" onclick="showAll()" >SHOW ALL</a></li>
                     <li><button id="subhead" onclick="latestTrailer()">LATEST TRAILERS</a></li>
-                    <li><button id="subhead" onclick="topRated()">TOP RATED</a></li>
-                    <li><button id="subhead" onclick="mostCommented()">MOST COMMENTED</a></li>
+                    <!-- <li><button id="subhead" onclick="topRated()">TOP RATED</a></li>
+                    <li><button id="subhead" onclick="mostCommented()">MOST COMMENTED</a></li> -->
                 </ul>
                 <div id="search">
                     <form method="get" accept-charset="utf-8">
@@ -162,12 +160,24 @@ if (isset($_POST["btnlogout"])) {
             function latestTrailer(){
                 listTrailer();
             }
-            function topRated(){
-                
-            }
-            function mostCommented(){
+            // function topRated(){ //urutin dari rating pake ajax
+            //     const dv = $("#movieid");
+            //     dv.html("");
+            //     $.ajax({
+            //         url: "rating.php",
+            //         success: function(result){
+            //             arr_rating = JSON.parse(result);
+            //             arr_rating.array.forEach(rating => {
+            //                 dv.append(`
+                                
+            //                 `);
+            //             });
+            //         }
+            //     })
+            // }
+            // function mostCommented(){
             
-            }
+            // }
             
             $(document).ready(function() {
                 sortFilm();
@@ -227,7 +237,9 @@ if (isset($_POST["btnlogout"])) {
                                         <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
                                         <p>Genre : ${movie.genre}</p>
                                         <br>
-                                        <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
+                                        <p style="margin-bottom: 10px">
+                                            ${movie.detail}
+                                        </p>
                                     </div>
                                 </div>
 
@@ -263,7 +275,7 @@ if (isset($_POST["btnlogout"])) {
                                     <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
                                     <p>Genre : ${movie.genre}</p>
                                     <br>
-                                    <p style="margin-bottom: 10px">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.</p>
+                                    <p style="margin-bottom: 10px">${movie.detail}</p>
                                 </div>
                             </div>
 

@@ -118,14 +118,12 @@ if (isset($_POST["btnlogout"])) {
                     <ul>
                         <li><a href="homepage.php">HOME</a></li>
                         <li><a class="active" href="#">NEWS</a></li>
-                        <li><a href="#">IN THEATERS</a></li>
-                        <li><a href="contact.php">CONTACT</a></li>
                         <li><a href="history.php">HISTORY</a></li>
                         <input type="submit" id="logout" name="btnlogout" value="LOGOUT">
                     </ul>
                 </form>
             </div>
-            <!-- <div id="sub-navigation"> -->
+            <div id="sub-navigation" style="border-bottom: 0px solid black;">
                 <!-- <ul>
                     <li><button id="subhead" onclick="showAll()" >SHOW ALL</a></li>
                     <li><button id="subhead" onclick="latestTrailer()">LATEST TRAILERS</a></li>
@@ -139,7 +137,7 @@ if (isset($_POST["btnlogout"])) {
                         <input type="button" value="GO!" class="search-button" id="search123" onclick="sortFilm()">
                     </form>
                 </div> -->
-            <!-- </div> -->
+            </div>
         </div>
         <div id="main">
             <div id="content">

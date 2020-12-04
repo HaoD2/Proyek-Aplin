@@ -301,7 +301,7 @@ $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
         </div>
         <div id="main">
             <div id="content">
-                <div class="box">
+                <div class="box" id="film">
                     <!-- nyetel film disini -->
                 </div>
             </div>
@@ -346,6 +346,16 @@ $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
     </div>
 </body>
 <script>
+    $(document).ready(function(){
+        $.ajax({
+            url: "videoplayer.php",
+            success: function(result){
+                $("#film").html("");
+                $("#film").append(result);
+            }
+        })
+    });
+
     function rate(val){
         $.ajax({
             url: "rating.php?user=<?=$user?>&title=<?=$tes?>&rate=" + val,
@@ -355,5 +365,6 @@ $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
             }
         })
     }
+
 </script>
 </html>

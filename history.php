@@ -89,7 +89,7 @@
                 <form method="post">
                     <ul>
                         <li><a href="homepage.php">HOME</a></li>
-                        <!-- <li><a href="#">NEWS</a></li> -->
+                        <li><a href="news.php">NEWS</a></li>
                         <!-- <li><a href="#">IN THEATERS</a></li> -->
                         <!-- <li><a href="#">COMING SOON</a></li> -->
                         <!-- <li><a href="#">CONTACT</a></li> -->
@@ -107,13 +107,6 @@
         <div id="main" style="border-bottom: none;">
             <div id="content">
                 <div class="box" style="border-bottom: none;">
-                    <div class="head">
-                        <h2 style="margin-right: 5px;">Order By : </h2>
-                        <select name="order" id="order">
-                            <option value="desc">Latest upload</option>
-                            <option value="asc">Older upload</option>
-                        </select>
-                    </div>
                     <br>
                     <div id="movieid">
                         <?php foreach ($history as $key => $val) { ?>
