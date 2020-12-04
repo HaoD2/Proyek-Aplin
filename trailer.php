@@ -184,11 +184,12 @@ if (isset($_POST["btnlogout"])) {
                                 <div class="modal">
                                     <div class="pic">
                                         <span class="play"><span class="name">${trailer.nama_trailer}</span></span>
-                                        <a href="viewMovie.php?title=${trailer.nama_trailer}"><img src="images/${trailer['images']}" alt="" /></a>
+                                        <a href="#?title=${trailer.nama_trailer}"><img src="images/${trailer['images']}" alt="" /></a>
                                     </div>
                                     <div class="desc">
                                         <h1 style="font-size: 18px;margin-top: 10px;">${trailer.nama_trailer}</h1>
                                         <p>Description : ${trailer.desc_trailer}</p>
+                                        <p>Status:Coming Soon</p>
                                         <br>
                                     </div>
                                 </div>
