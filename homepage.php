@@ -117,6 +117,7 @@ if (isset($_POST["btnlogout"])) {
                 <form method="post">
                     <ul>
                         <li><a class="active" href="#">HOME</a></li>
+                        <li><a href="trailer.php">TRAILER</a></li>
                         <li><a href="news.php">NEWS</a></li>
                         <li><a href="history.php">HISTORY</a></li>
                         <input type="submit" id="logout" name="btnlogout" value="LOGOUT">

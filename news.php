@@ -17,7 +17,7 @@ if (isset($_POST["btnlogout"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>News</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
@@ -117,6 +117,7 @@ if (isset($_POST["btnlogout"])) {
                 <form method="post">
                     <ul>
                         <li><a href="homepage.php">HOME</a></li>
+                        <li><a href="trailer.php">TRAILER</a></li>
                         <li><a class="active" href="#">NEWS</a></li>
                         <li><a href="history.php">HISTORY</a></li>
                         <input type="submit" id="logout" name="btnlogout" value="LOGOUT">

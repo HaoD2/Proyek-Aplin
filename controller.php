@@ -26,3 +26,9 @@ if($_REQUEST["action"] == "showNews"){
     $json_datas = json_encode($news);
     echo $json_datas;
 }
+if($_REQUEST["action"] == "showtrailer"){
+    $querydesc = "SELECT * FROM trailer";
+    $trailer = $conn->query($querydesc)->fetch_all(MYSQLI_ASSOC);
+    $json_datas = json_encode($trailer);
+    echo $json_datas;
+}
