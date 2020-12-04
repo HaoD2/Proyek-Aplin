@@ -10,6 +10,9 @@ if (!isset($_SESSION['auth'])) {
 if (isset($_POST['movie'])) {
     header("location:adminmovie.php");
 }
+if (isset($_POST['Trailer'])) {
+    header("location:admintrailer.php");
+}
 if (isset($_POST['user'])) {
     header("location:adminuser.php");
 }
@@ -71,6 +74,9 @@ foreach ($user as $value) {
                 </button>
                 <button class="login100-form-btn" name="movie" style="width: 200px; background-color:black">
                     Movie
+                </button>
+                <button class="login100-form-btn" name="Trailer" style="width: 200px; background-color:black">
+                    Trailer
                 </button>
                 <button class="login100-form-btn" name="logout" style="width: 200px; background-color:black"">
                     Logout

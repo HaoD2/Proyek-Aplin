@@ -27,18 +27,18 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
     $fileName = basename($_FILES["myfile"]["name"]);
     $targetFilePath = $targetDir . $fileName;
     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-    $namaMovie = $_POST['namemovie'];
+    $namatrailer = $_POST['nama_trailer'];
     $genre = $_POST['genre'];
     $image = $_FILES['myfile'];
     $desc = $_POST['description'];
     $isCheck = false;
     // Allow certain file formats
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
-    $movie = $conn->query("select * from movie")->fetch_all(MYSQLI_ASSOC);
-    if ($namaMovie != "" && $genre != "" && $image != "") {
-        foreach ($movie as $value) {
+    $trailer = $conn->query("select * from trailer")->fetch_all(MYSQLI_ASSOC);
+    if ($namatrailer != "" && $genre != "" && $image != "") {
+        foreach ($trailer as $value) {
             # code...
-            if ($value['name_movie'] == $namaMovie) {
+            if ($value['nama_trailer'] == $namatrailer) {
                 $isCheck = true;
             }
         }
@@ -51,8 +51,7 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
                 // Upload file to server
                 if (move_uploaded_file($_FILES["myfile"]["tmp_name"], $targetFilePath)) {
                     // Insert image file name into database
-                    $insert = $conn->query("INSERT into movie VALUES (null,'$namaMovie','$genre','" . $fileName . "', 0)");
-                    $insert2 = $conn->query("INSERT into detailmovie VALUES (0,'$desc')");
+                    $insert = $conn->query("INSERT into trailer VALUES (null,'$namatrailer','$genre','$desc','". $fileName ."')");
                     if ($insert) {
                         alert("The file " . $fileName . " has been uploaded successfully.");
                     } else {
@@ -75,16 +74,13 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
 
 
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>trailer admin</title>
     <!--===============================================================================================-->
     <link rel="icon" type="login/image/png" href="login/images/icons/favicon.ico" />
     <!--===============================================================================================-->
@@ -101,12 +97,9 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
-
-
 </head>
 
 <body>
-
     <div class="limiter">
         <form method="post">
             <div class="menuBar" style="display: flex;background-color: black;">
@@ -121,17 +114,15 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
                 </button>
                 <button class="login100-form-btn" name="logout" style="width: 200px; background-color:black"">
                     Logout
-            </button>
-            </form>
-
-
-        </div>
+                </button>
+            </div>
+        </form>      
         <div class=" container-login100">
                     <div class="wrap-login100">
                         <form class="login100-form validate-form" method="POST" style="float: left;" enctype="multipart/form-data">
-                            <h1 style="margin-top: -150px;margin-bottom: 100px;">New Movie</h1>
+                            <h1 style="margin-top: -150px;margin-bottom: 100px;">New Trailer</h1>
                             <div class="wrap-input100 ">
-                                <input class="input100" type="text" name="namemovie" placeholder="Nama Movie">
+                                <input class="input100" type="text" name="nama_trailer" placeholder="Nama trailer">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-users" aria-hidden="true"></i>
@@ -162,11 +153,6 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
                     </div>
             </div>
     </div>
-
-
-
-
-
+ 
 </body>
-
 </html>

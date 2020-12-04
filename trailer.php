@@ -188,6 +188,7 @@ if (isset($_POST["btnlogout"])) {
                                     </div>
                                     <div class="desc">
                                         <h1 style="font-size: 18px;margin-top: 10px;">${trailer.nama_trailer}</h1>
+                                        <p>Genre : ${trailer.genre}</p>
                                         <p>Description : ${trailer.desc_trailer}</p>
                                         <p>Status:Coming Soon</p>
                                         <br>
