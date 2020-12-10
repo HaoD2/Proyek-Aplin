@@ -1,42 +1,42 @@
 <?php
-    require_once("helper.php");
-    $db = new Connection;
-    $conn = $db->getConnection();
+require_once("helper.php");
+$db = new Connection;
+$conn = $db->getConnection();
 
-    if(!isset($_SESSION['auth'])){
-        header("location:login.php");
-    }
+if(!isset($_SESSION['auth'])){
+    header("location:login.php");
+}
 
-    if (isset($_POST["btnlogout"])) {
-        unset($_SESSION['auth']);
-        header("location:login.php");
-    }
+if (isset($_POST["btnlogout"])) {
+    unset($_SESSION['auth']);
+    header("location:login.php");
+}
 
-    $tes = $_GET['title'];
-    $user = $_SESSION['auth']['username'];
+$tes = $_GET['title'];
+$user = $_SESSION['auth']['username'];
 
-    $querysearch        = "SELECT * FROM movie where name_movie = '$tes'";
-    $querydesc          = "SELECT d.detail FROM detailmovie as d,movie as m where d.id_movie = m.id_movie and m.name_movie = '$tes'";
-    $queryratingfilm    = "SELECT COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
-    $querycomment       = "SELECT COUNT(*) as jml FROM comment";
-    $querycomment2      = "SELECT * FROM comment ORDER BY id desc";
+$querysearch        = "SELECT * FROM movie where name_movie = '$tes'";
+$querydesc          = "SELECT d.detail FROM detailmovie as d,movie as m where d.id_movie = m.id_movie and m.name_movie = '$tes'";
+$queryratingfilm    = "SELECT COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
+$querycomment       = "SELECT COUNT(*) as jml FROM comment";
+$querycomment2      = "SELECT * FROM comment ORDER BY id desc";
 
 
-    $movie = $conn->query($querysearch)->fetch_all(MYSQLI_ASSOC);
-    $synopsis = $conn->query($querydesc)->fetch_all(MYSQLI_ASSOC);
-    $rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
-    $comment = $conn->query($querycomment)->fetch_all(MYSQLI_ASSOC);
-    $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
+$movie = $conn->query($querysearch)->fetch_all(MYSQLI_ASSOC);
+$synopsis = $conn->query($querydesc)->fetch_all(MYSQLI_ASSOC);
+$rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
+$comment = $conn->query($querycomment)->fetch_all(MYSQLI_ASSOC);
+$comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
 
-    $id_movie = $movie[0]['id_movie'];
+$id_movie = $movie[0]['id_movie'];
 
-    $queryhistory = "SELECT h.username FROM history as h where h.username = '$user' and h.id_movie = '$id_movie' ";
-    $history = $conn->query($queryhistory)->fetch_all(MYSQLI_ASSOC);
+$queryhistory = "SELECT h.username FROM history as h where h.username = '$user' and h.id_movie = '$id_movie' ";
+$history = $conn->query($queryhistory)->fetch_all(MYSQLI_ASSOC);
 
-    if(!isset($history[0]['username']) && isset($_SESSION['auth']['username'])){
-        $queryinsert = "INSERT INTO history values(0,'$user','$id_movie')";
-        $conn ->query($queryinsert);
-    }
+if(!isset($history[0]['username']) && isset($_SESSION['auth']['username'])){
+    $queryinsert = "INSERT INTO history values(0,'$user','$id_movie')";
+    $conn ->query($queryinsert);
+}
 
 ?>
 
