@@ -3,9 +3,11 @@ require_once("helper.php");
 
 $db = new Connection;
 $conn = $db->getConnection();
+
 if (!isset($_SESSION['auth'])) {
     header("Location:login.php");
 }
+
 if (isset($_POST["btnlogout"])) {
     unset($_SESSION['auth']);
     header("location:login.php");
@@ -66,7 +68,7 @@ if (isset($_POST["btnlogout"])) {
     }
 
     .desc {
-        width: 70%;
+        width: 80%;
         margin-left: 7%;
         float: left;
     }
@@ -125,28 +127,16 @@ if (isset($_POST["btnlogout"])) {
                 </form>
             </div>
             <div id="sub-navigation" style="border-bottom: 0px solid black;">
-                <!-- <ul>
-                    <li><button id="subhead" onclick="showAll()" >SHOW ALL</a></li>
-                    <li><button id="subhead" onclick="latestTrailer()">LATEST TRAILERS</a></li>
-                    <li><button id="subhead" onclick="topRated()">TOP RATED</a></li>
-                    <li><button id="subhead" onclick="mostCommented()">MOST COMMENTED</a></li>
-                </ul>
-                <div id="search">
-                    <form method="get" accept-charset="utf-8">
-                        <label for="search-field">SEARCH</label>
-                        <input type="text" name="search field" placeholder="Enter search here" id="search-field" class="blink search-field" />
-                        <input type="button" value="GO!" class="search-button" id="search123" onclick="sortFilm()">
-                    </form>
-                </div> -->
+                
             </div>
         </div>
         <div id="main">
             <div id="content">
-                <div class="box">
+                <div class="box" style="width: 90%;margin: auto;">
                     <div class="head">
                         
                     </div>
-                    <div id="newsid">
+                    <div id="newsid" style="width: 100%;">
                         <!-- KONTEN DISINI -->
                     </div>
                 </div>
@@ -173,12 +163,12 @@ if (isset($_POST["btnlogout"])) {
                     arr_news.forEach(news => {
                         
                         dv.append(`
-                            <div class="modal">
+                            <div class="modal" style="width:80%;margin: auto;margin-bottom:5px">
+                                <h1 style="font-size: 32px;margin-top: 10px;margin-left: 7%;margin-right:10%;">${news.head_news} <b style="font-size:11px;font-weight:normal;color:lightgray;"><br> Posted on : ${news.timestamp} </b></h1>
                                 <div class="desc">
-                                    <h1 style="font-size: 18px;margin-top: 10px;">${news.head_news}</h1>
-                                    <p>Updated: ${news.timestamp}</p>
+                                    
                                     <br>
-                                    <p style="margin-bottom: 10px">${news.detail_news}</p>
+                                    <p style="margin-bottom: 10px;text-align: justify;font-size: 14px"> ${news.detail_news}</p>
                                 </div>
                             </div>
                         `)

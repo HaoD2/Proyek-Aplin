@@ -12,9 +12,10 @@
     <title>Document</title>
 </head>
 
-<link rel="stylesheet" href="video-js.min.css">
-<script src="video.min.js"></script>
 <style>
+    *{
+        margin: 0%;
+    }
     .kotak{
         box-sizing: content-box;
     }
@@ -28,15 +29,18 @@
         transition: 100ms;
         font-size: 20px;   
     }
-    
+    #vid{
+        width: 720px;
+        height: 480px;
+        margin: auto;
+    }
 </style>
 
 <body>
     <div class="kotak">
         <div id="vid">
-            <video class="video-js vj-default-skin" id="videoku"  style="width: 720px; height: 480px;margin: auto;" poster="images/maxresdefault.jpg" controls >
+            <video id="videoku" poster="images/maxresdefault.jpg" style="width: 720px; height: 480px;margin: auto;" controls >
                     <source id="srcku" src="https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/Caminandes_3_-_Llamigos_-_Blender_Animated_Short.webm/Caminandes_3_-_Llamigos_-_Blender_Animated_Short.webm.480p.webm" type="video/webm" selected="true" >
-                <p class="vjs-no-js">aku mah apa atuh, cuman selingkuhan kamuh</p>
             </video>
         </div>
         

@@ -1,11 +1,6 @@
+<script src="js/sweetalert2.all.js"></script>
+<link rel="stylesheet" href="css/sweetalert2.css">
 <?php
-require_once('helper.php');
-
-
-$db = new Connection;
-$conn = $db->getConnection();
-
-
 if (isset($_POST['asRegister'])) {
 	$isCheck = false;
 	$username = $_POST['username'];
@@ -14,29 +9,60 @@ if (isset($_POST['asRegister'])) {
 	$cpassword = $_POST['cpass'];
 	$email = $_POST['email'];
 	$role = $_POST['role'];
+
 	if ($username == "" && $password == "" && $email == "" && $username == "") {
-		alert("Fill Blank !!!");
-	} else {
+		echo "<script>Swal.fire(
+			'Gagal!',
+			'Pastikan seluruh isian telah terisi!',
+			'error'
+		);</script>";
+	} 
+	else {
 		$user = $conn->query("select * from user")->fetch_all(MYSQLI_ASSOC);
+
 		foreach ($user as $value) {
 			# code...
 			if ($value['email'] == $email || $value['username'] == $username) {
 				$isCheck = true;
 			}
 		}
-		if ($isCheck) {
-			alert("Email/Username sudah Digunakan");
-		} else {
+
+		if ($isCheck) { ?>
+			<script>
+				Swal.fire({
+					title: 'Gagal!',
+					text: 'Email atau username telah digunakan!',
+					type: 'error'
+				});
+			</script> <?php
+		} 
+		else {
+
 			if ($password == $cpassword) {
 				$password = password_hash($_REQUEST["pass"], PASSWORD_DEFAULT);
+
 				if ($role == "VIP") {
 					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',2,1)";
-					$conn->query($q);
-					alert("Berhasil");
-				} else if ($role == "Member") {
+					if($conn->query($q) === true){
+						echo "<script>Swal.fire(
+							'Berhasil!',
+							'Berhasil membuat akun!',
+							'success'
+						);</script>";
+					}
+					
+				} 
+				else if ($role == "Member") {
 					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',3,1)";
-					$conn->query($q);
-					alert("Berhasil");
+
+					if($conn->query($q) === true){
+						echo "<script>Swal.fire(
+							'Berhasil!',
+							'Berhasil membuat akun!',
+							'success'
+						);</script>";
+					}
+					
 				}
 			} else {
 				alert("Password Tidak Sama");
@@ -173,9 +199,61 @@ if (isset($_POST['asRegister'])) {
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
-
-
-
 </body>
-
+<script>
+	function myfunction(){
+		Swal.fire(
+		'Good job!',
+		'You clicked the button!',
+		'success'
+		)
+  	}
+</script>
 </html>
+<?php
+	require_once('helper.php');
+
+	$db = new Connection;
+	$conn = $db->getConnection();
+
+	if($_GET['err'] == 'no'){ ?>
+		<script>
+			Swal.fire(
+				'Berhasil!',
+				'Berhasil membuat akun!',
+				'success'
+			)
+		</script>
+	<?php
+	}
+	else if($_GET['err'] == '1'){ ?>
+		<script>
+			Swal.fire(
+				'Gagal!',
+				'Pastikan Semua field sudah terisi!',
+				'error'
+			)
+		</script>
+	<?php
+	}
+	else if($_GET['err'] == '2'){ ?>
+		<script>
+			Swal.fire(
+				'Gagal!',
+				'Email atau username telah digunakan!',
+				'error'
+			)
+		</script>
+	<?php
+	}
+	else{ ?>
+		<script>
+			Swal.fire(
+				'Gagal!',
+				'Pastikan password sudah terisi dengan benar!',
+				'error'
+			)
+		</script>
+	<?php 
+	}
+	?>

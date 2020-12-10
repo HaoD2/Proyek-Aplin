@@ -1,25 +1,49 @@
 <?php
-require_once("helper.php");
-$db = new Connection;
-$conn = $db->getConnection();
+    require_once("helper.php");
+    $db = new Connection;
+    $conn = $db->getConnection();
 
-$tes = $_GET['title'];
-$user = $_SESSION['auth']['username'];
+    if(!isset($_SESSION['auth'])){
+        header("location:login.php");
+    }
 
-$querysearch = "SELECT * FROM movie where name_movie = '$tes'";
-$querydesc = "SELECT d.detail FROM detailmovie as d,movie as m where d.id_movie = m.id_movie and m.name_movie = '$tes'";
-$queryratingfilm = "SELECT COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
-$querycomment = "SELECT COUNT(*) as jml FROM comment";
-$querycomment2 = "SELECT * FROM comment ORDER BY id desc";
+    if (isset($_POST["btnlogout"])) {
+        unset($_SESSION['auth']);
+        header("location:login.php");
+    }
 
-$movie = $conn->query($querysearch)->fetch_all(MYSQLI_ASSOC);
-$synopsis = $conn->query($querydesc)->fetch_all(MYSQLI_ASSOC);
-$rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
-$comment = $conn->query($querycomment)->fetch_all(MYSQLI_ASSOC);
-$comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
+    $tes = $_GET['title'];
+    $user = $_SESSION['auth']['username'];
+
+    $querysearch        = "SELECT * FROM movie where name_movie = '$tes'";
+    $querydesc          = "SELECT d.detail FROM detailmovie as d,movie as m where d.id_movie = m.id_movie and m.name_movie = '$tes'";
+    $queryratingfilm    = "SELECT COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
+    $querycomment       = "SELECT COUNT(*) as jml FROM comment";
+    $querycomment2      = "SELECT * FROM comment ORDER BY id desc";
+
+
+    $movie = $conn->query($querysearch)->fetch_all(MYSQLI_ASSOC);
+    $synopsis = $conn->query($querydesc)->fetch_all(MYSQLI_ASSOC);
+    $rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
+    $comment = $conn->query($querycomment)->fetch_all(MYSQLI_ASSOC);
+    $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
+
+    $id_movie = $movie[0]['id_movie'];
+
+    $queryhistory = "SELECT h.username FROM history as h where h.username = '$user' and h.id_movie = '$id_movie' ";
+    $history = $conn->query($queryhistory)->fetch_all(MYSQLI_ASSOC);
+
+    if(!isset($history[0]['username']) && isset($_SESSION['auth']['username'])){
+        $queryinsert = "INSERT INTO history values(0,'$user','$id_movie')";
+        $conn ->query($queryinsert);
+    }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
+
 
 <head>
     <meta charset="UTF-8">
@@ -29,11 +53,13 @@ $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/sweetalert2.css">
 
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="js/jquery-func.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
     <!-- [if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif] -->
 </head>
 <style>
@@ -223,6 +249,19 @@ $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
     height: 60px;
     float: left;
   }
+  #logout{
+    background-color: black;
+    color: white;
+    margin-left: 29px;
+    border: 1px solid black;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+
+  #logout:hover{
+    cursor: pointer;
+    color: red;
+  }
 </style>
 
 <body>
@@ -242,20 +281,17 @@ $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
             <div id="navigation">
                 <form method="post">
                     <ul>
-                        <li><a href="homepage.php">HOME</a></li>
-                        <li><a href="#">NEWS</a></li>
-                        <li><a href="#">IN THEATERS</a></li>
-                        <li><a href="#">CONTACT</a></li>
-                        <li><a href="login.php">LOGOUT</a></li>
+                        <li><a class="active" href="#">HOME</a></li>
+                        <li><a href="trailer.php">TRAILER</a></li>
+                        <li><a href="news.php">NEWS</a></li>
+                        <li><a href="history.php">HISTORY</a></li>
+                        <input type="submit" id="logout" name="btnlogout" value="LOGOUT">
                     </ul>
                 </form>
             </div>
             <div id="sub-navigation">
                 <ul>
-                    <li><a href="showAll.php">SHOW ALL</a></li>
-                    <li><a href="#">LATEST TRAILERS</a></li>
-                    <li><a href="#">TOP RATED</a></li>
-                    <li><a href="#">MOST COMMENTED</a></li>
+                    <li><a href="homepage.php">SHOW ALL</a></li>
                 </ul>
                 <div id="search">
                     <form action="#" method="get" accept-charset="utf-8">
@@ -266,7 +302,7 @@ $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
         </div>
-        <div id="main">
+        <div id="main" style="border-bottom: 0px solid black;">
             <div id="content">
                 <div class="box" style="height: 395px;">
                     <div class="pic">
@@ -299,14 +335,14 @@ $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
         </div>
-        <div id="main">
+        <div id="main" style="border-bottom: 0px solid black;">
             <div id="content">
                 <div class="box" id="film">
                     <!-- nyetel film disini -->
                 </div>
             </div>
         </div>
-        <div id="main">
+        <div id="main" style="border-bottom: 0px solid black;">
             <div id="content">
                 <div class="box">
                     <h4 style="margin-left: 10px;">Write Your Comment Here!</h4>

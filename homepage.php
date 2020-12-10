@@ -45,7 +45,7 @@ if (isset($_POST["btnlogout"])) {
     }
 
     .modal {
-        width: 80%;
+        width: 100%;
         background-color: rgba(34, 34, 34, 0.856);
         color: rgb(245, 246, 255);
         border-radius: 3px;
@@ -127,9 +127,6 @@ if (isset($_POST["btnlogout"])) {
             <div id="sub-navigation">
                 <ul>
                     <li><button id="subhead" onclick="showAll()" >SHOW ALL</a></li>
-                    <li><button id="subhead" onclick="latestTrailer()">LATEST TRAILERS</a></li>
-                    <!-- <li><button id="subhead" onclick="topRated()">TOP RATED</a></li>
-                    <li><button id="subhead" onclick="mostCommented()">MOST COMMENTED</a></li> -->
                 </ul>
                 <div id="search">
                     <form method="get" accept-charset="utf-8">
@@ -142,7 +139,7 @@ if (isset($_POST["btnlogout"])) {
         </div>
         <div id="main">
             <div id="content">
-                <div class="box">
+                <div class="box" style="width: 100%;">
                     <div class="head">
                         
                     </div>
@@ -157,9 +154,6 @@ if (isset($_POST["btnlogout"])) {
         <script>
             function showAll(){
                 listmovie();
-            }
-            function latestTrailer(){
-                listTrailer();
             }
             // function topRated(){ //urutin dari rating pake ajax
             //     const dv = $("#movieid");
@@ -186,32 +180,6 @@ if (isset($_POST["btnlogout"])) {
 
             })
 
-            function listTrailer(){
-                const dv = $("#movieid");
-                dv.html("");
-                $.ajax({
-                        url: "trailer.php",
-                        success: function(result){
-                            arr_trailer = JSON.parse(result);
-                            arr_trailer.forEach(trailer => {
-                                dv.append(`
-                                <div class="modal">
-                                    <div class="pic">
-                                        <span class="play"><span class="name">${trailer.nama_trailer}</span></span>
-                                        <a href="viewMovie.php?title=${trailer.nama_trailer}"><img src="" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                        <h1 style="font-size: 18px;margin-top: 10px;">${trailer.nama_trailer}</h1>
-                                        <br>
-                                        <p style="margin-bottom: 10px">${trailer.desc_trailer}</p>
-                                    </div>
-                                </div>
-
-                            `)
-                            })
-                        }
-                });
-            }
 
             function listmovie() {
                 $.ajax({
@@ -235,10 +203,10 @@ if (isset($_POST["btnlogout"])) {
                                         <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/${movie['image']}" alt="" /></a>
                                     </div>
                                     <div class="desc">
-                                        <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
-                                        <p>Genre : ${movie.genre}</p>
+                                        <h1 style="font-size: 20px;margin-top: 10px;">${movie.name_movie}</h1>
+                                        <p style="font-size: 14px;">Genre : ${movie.genre}</p>
                                         <br>
-                                        <p style="margin-bottom: 10px">
+                                        <p style="margin-bottom: 10px;font-size: 14px;">
                                             ${movie.detail}
                                         </p>
                                     </div>
@@ -273,10 +241,12 @@ if (isset($_POST["btnlogout"])) {
                                     <a href="viewMovie.php?title=${movie.name_movie}"><img src="images/${movie['image']}" alt="" /></a>
                                 </div>
                                 <div class="desc">
-                                    <h1 style="font-size: 18px;margin-top: 10px;">${movie.name_movie}</h1>
-                                    <p>Genre : ${movie.genre}</p>
+                                    <h1 style="font-size: 20px;margin-top: 10px;">${movie.name_movie}</h1>
+                                    <p style="font-size: 14px;">Genre : ${movie.genre}</p>
                                     <br>
-                                    <p style="margin-bottom: 10px">${movie.detail}</p>
+                                    <p style="margin-bottom: 10px;font-size: 14px;">
+                                        ${movie.detail}
+                                    </p>
                                 </div>
                             </div>
 

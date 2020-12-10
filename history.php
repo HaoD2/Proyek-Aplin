@@ -2,6 +2,15 @@
     require_once("helper.php");
     $db = new Connection;
     $conn = $db->getConnection();
+
+    if(!isset($_SESSION['auth'])){
+        header("location:login.php");
+    }
+    
+    if (isset($_POST["btnlogout"])) {
+        unset($_SESSION['auth']);
+        header("location:login.php");
+    }
     
     $data = $_SESSION['auth']['username'];
     $query = "SELECT m.name_movie as movie, m.genre as genre,m.image as pic,d.detail FROM history as h, movie as m,detailmovie as d where username = '$data' AND h.id_movie = m.id_movie and d.id_movie = h.id_movie";
@@ -70,6 +79,18 @@
         margin-left: 7%;
         float: left;
     }
+    #logout{
+        background-color: black;
+        color: white;
+        margin-left: 29px;
+        border: 1px solid black;
+        font-size: 14px;
+        font-weight: bolder;
+    }
+    #logout:hover{
+        cursor: pointer;
+        color: red;
+    }
 </style>
 <body>
     <!-- START PAGE SOURCE -->
@@ -89,14 +110,10 @@
                 <form method="post">
                     <ul>
                         <li><a href="homepage.php">HOME</a></li>
+                        <li><a href="trailer.php">TRAILER</a></li>
                         <li><a href="news.php">NEWS</a></li>
-                        <!-- <li><a href="#">IN THEATERS</a></li> -->
-                        <!-- <li><a href="#">COMING SOON</a></li> -->
-                        <!-- <li><a href="#">CONTACT</a></li> -->
-                        <!-- <li><a href="#">ADVERTISE</a></li> -->
-                        <li><a class="active" href="#">HISTORY</a></li>
-                        <!-- belum berfungsi -->
-                        <li><a href="login.php">LOGOUT</a></li>
+                        <li><a class="active" href="history.php">HISTORY</a></li>
+                        <input type="submit" id="logout" name="btnlogout" value="LOGOUT">
                     </ul>
                 </form>
             </div>
@@ -106,7 +123,7 @@
         </div>
         <div id="main" style="border-bottom: none;">
             <div id="content">
-                <div class="box" style="border-bottom: none;">
+                <div class="box" style="border-bottom: none; width: 100%;">
                     <br>
                     <div id="movieid">
                         <?php foreach ($history as $key => $val) { ?>

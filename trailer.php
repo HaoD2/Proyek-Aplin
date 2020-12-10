@@ -133,19 +133,6 @@ if (isset($_POST["btnlogout"])) {
                 </form>
             </div>
             <div id="sub-navigation" style="border-bottom: 0px solid black;">
-                <!-- <ul>
-                    <li><button id="subhead" onclick="showAll()" >SHOW ALL</a></li>
-                    <li><button id="subhead" onclick="latestTrailer()">LATEST TRAILERS</a></li>
-                    <li><button id="subhead" onclick="topRated()">TOP RATED</a></li>
-                    <li><button id="subhead" onclick="mostCommented()">MOST COMMENTED</a></li>
-                </ul>
-                <div id="search">
-                    <form method="get" accept-charset="utf-8">
-                        <label for="search-field">SEARCH</label>
-                        <input type="text" name="search field" placeholder="Enter search here" id="search-field" class="blink search-field" />
-                        <input type="button" value="GO!" class="search-button" id="search123" onclick="sortFilm()">
-                    </form>
-                </div> -->
             </div>
         </div>
         <div id="main">
@@ -184,7 +171,7 @@ if (isset($_POST["btnlogout"])) {
                                 <div class="modal">
                                     <div class="pic">
                                         <span class="play"><span class="name">${trailer.nama_trailer}</span></span>
-                                        <a href="#?title=${trailer.nama_trailer}"><img src="images/${trailer['images']}" alt="" /></a>
+                                        <a href="viewTrailer.php?title=${trailer.nama_trailer}"> <img src="images/${trailer['images']}" alt="" /></a>
                                     </div>
                                     <div class="desc">
                                         <h1 style="font-size: 18px;margin-top: 10px;">${trailer.nama_trailer}</h1>
