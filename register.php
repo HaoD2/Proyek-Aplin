@@ -1,75 +1,20 @@
 <script src="js/sweetalert2.all.js"></script>
 <link rel="stylesheet" href="css/sweetalert2.css">
 <?php
-if (isset($_POST['asRegister'])) {
-	$isCheck = false;
-	$username = $_POST['username'];
-	$password = $_POST['pass'];
-	$fullname = $_POST['fullname'];
-	$cpassword = $_POST['cpass'];
-	$email = $_POST['email'];
-	$role = $_POST['role'];
+    require_once('helper.php');
 
-	if ($username == "" && $password == "" && $email == "" && $username == "") {
-		echo "<script>Swal.fire(
-			'Gagal!',
-			'Pastikan seluruh isian telah terisi!',
-			'error'
-		);</script>";
-	} 
-	else {
-		$user = $conn->query("select * from user")->fetch_all(MYSQLI_ASSOC);
+    $db = new Connection;
+    $conn = $db->getConnection();
 
-		foreach ($user as $value) {
-			# code...
-			if ($value['email'] == $email || $value['username'] == $username) {
-				$isCheck = true;
-			}
-		}
-
-		if ($isCheck) { ?>
-			<script>
-				Swal.fire({
-					title: 'Gagal!',
-					text: 'Email atau username telah digunakan!',
-					type: 'error'
-				});
-			</script> <?php
-		} 
-		else {
-
-			if ($password == $cpassword) {
-				$password = password_hash($_REQUEST["pass"], PASSWORD_DEFAULT);
-
-				if ($role == "VIP") {
-					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',2,1)";
-					if($conn->query($q) === true){
-						echo "<script>Swal.fire(
-							'Berhasil!',
-							'Berhasil membuat akun!',
-							'success'
-						);</script>";
-					}
-					
-				} 
-				else if ($role == "Member") {
-					$q = "INSERT INTO user VALUES('$username','$fullname','$password','$email',3,1)";
-
-					if($conn->query($q) === true){
-						echo "<script>Swal.fire(
-							'Berhasil!',
-							'Berhasil membuat akun!',
-							'success'
-						);</script>";
-					}
-					
-				}
-			} else {
-				alert("Password Tidak Sama");
-			}
-		}
-	}
-}
+    if (isset($_POST['asRegister'])) {
+        $isCheck = false;
+        $username = $_POST['username'];
+        $password = $_POST['pass'];
+        $fullname = $_POST['fullname'];
+        $cpassword = $_POST['cpass'];
+        $email = $_POST['email'];
+        $role = $_POST['role'];
+    }
 
 ?>
 
@@ -211,49 +156,47 @@ if (isset($_POST['asRegister'])) {
 </script>
 </html>
 <?php
-	require_once('helper.php');
 
-	$db = new Connection;
-	$conn = $db->getConnection();
-
-	if($_GET['err'] == 'no'){ ?>
-		<script>
-			Swal.fire(
-				'Berhasil!',
-				'Berhasil membuat akun!',
-				'success'
-			)
-		</script>
-	<?php
-	}
-	else if($_GET['err'] == '1'){ ?>
-		<script>
-			Swal.fire(
-				'Gagal!',
-				'Pastikan Semua field sudah terisi!',
-				'error'
-			)
-		</script>
-	<?php
-	}
-	else if($_GET['err'] == '2'){ ?>
-		<script>
-			Swal.fire(
-				'Gagal!',
-				'Email atau username telah digunakan!',
-				'error'
-			)
-		</script>
-	<?php
-	}
-	else{ ?>
-		<script>
-			Swal.fire(
-				'Gagal!',
-				'Pastikan password sudah terisi dengan benar!',
-				'error'
-			)
-		</script>
-	<?php 
-	}
-	?>
+    if(isset($_GET['err'])){
+        if($_GET['err'] == 'no'){ ?>
+            <script>
+                Swal.fire(
+                    'Berhasil!',
+                    'Berhasil membuat akun!',
+                    'success'
+                )
+            </script>
+        <?php
+        }
+        else if($_GET['err'] == '1'){ ?>
+            <script>
+                Swal.fire(
+                    'Gagal!',
+                    'Pastikan Semua field sudah terisi!',
+                    'error'
+                )
+            </script>
+        <?php
+        }
+        else if($_GET['err'] == '2'){ ?>
+            <script>
+                Swal.fire(
+                    'Gagal!',
+                    'Email atau username telah digunakan!',
+                    'error'
+                )
+            </script>
+        <?php
+        }
+        else{ ?>
+            <script>
+                Swal.fire(
+                    'Gagal!',
+                    'Pastikan password sudah terisi dengan benar!',
+                    'error'
+                )
+            </script>
+        <?php 
+        }
+    }
+?>

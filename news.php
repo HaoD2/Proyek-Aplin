@@ -163,12 +163,12 @@ if (isset($_POST["btnlogout"])) {
                     arr_news.forEach(news => {
                         
                         dv.append(`
-                            <div class="modal" style="width:80%;margin: auto;margin-bottom:5px">
+                            <div class="modal" style="width:80%;margin: auto;margin-bottom:15px">
                                 <h1 style="font-size: 32px;margin-top: 10px;margin-left: 7%;margin-right:10%;">${news.head_news} <b style="font-size:11px;font-weight:normal;color:lightgray;"><br> Posted on : ${news.timestamp} </b></h1>
                                 <div class="desc">
                                     
                                     <br>
-                                    <p style="margin-bottom: 10px;text-align: justify;font-size: 14px"> ${news.detail_news}</p>
+                                    <p style="margin-bottom: 20px;text-align: justify;font-size: 14px"> ${news.detail_news}</p>
                                 </div>
                             </div>
                         `)

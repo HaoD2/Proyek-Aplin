@@ -174,8 +174,7 @@ if (isset($_POST["btnlogout"])) {
                                         <a href="viewTrailer.php?title=${trailer.nama_trailer}"> <img src="images/${trailer['images']}" alt="" /></a>
                                     </div>
                                     <div class="desc">
-                                        <h1 style="font-size: 18px;margin-top: 10px;">${trailer.nama_trailer}</h1>
-                                        <p>Genre : ${trailer.genre}</p>
+                                        <h1 style="font-size: 18px;margin-top: 10px;margin-bottom: 15px;">${trailer.nama_trailer}</h1>
                                         <p>Description : ${trailer.desc_trailer}</p>
                                         <p>Status:Coming Soon</p>
                                         <br>
