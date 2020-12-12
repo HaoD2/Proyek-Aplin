@@ -1,4 +1,7 @@
+<script src="js/sweetalert2.all.js"></script>
+<link rel="stylesheet" href="css/sweetalert2.css">
 <?php
+
 require_once("helper.php");
 
 $db = new Connection;
@@ -20,65 +23,12 @@ if (isset($_POST['logout'])) {
     header("Location:login.php");
     unset($_SESSION['auth']);
 }
-if(isset($_POST['News'])){
+if (isset($_POST['News'])) {
     header("Location:adminnews.php");
 }
-
-
-
-if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
-    $targetDir = "images/";
-    $fileName = basename($_FILES["myfile"]["name"]);
-    $targetFilePath = $targetDir . $fileName;
-    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-    $namaMovie = $_POST['namemovie'];
-    $genre = $_POST['genre'];
-    $image = $_FILES['myfile'];
-    $desc = $_POST['description'];
-    $isCheck = false;
-    // Allow certain file formats
-    $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
-    $movie = $conn->query("select * from movie")->fetch_all(MYSQLI_ASSOC);
-    if ($namaMovie != "" && $genre != "" && $image != "") {
-        foreach ($movie as $value) {
-            # code...
-            if ($value['name_movie'] == $namaMovie) {
-                $isCheck = true;
-            }
-        }
-        if ($isCheck) {
-            alert("This Movie already Avaiable");
-        } else {
-
-
-            if (in_array($fileType, $allowTypes)) {
-                // Upload file to server
-                if (move_uploaded_file($_FILES["myfile"]["tmp_name"], $targetFilePath)) {
-                    // Insert image file name into database
-                    $insert = $conn->query("INSERT into movie VALUES (null,'$namaMovie','$genre','" . $fileName . "', 0)");
-                    $insert2 = $conn->query("INSERT into detailmovie VALUES (0,'$desc')");
-                    if ($insert) {
-                        alert("The file " . $fileName . " has been uploaded successfully.");
-                    } else {
-                        alert("File upload failed, please try again.");
-                    }
-                } else {
-                    alert("Sorry, there was an error uploading your file.");
-                }
-            } else {
-                alert('Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.');
-            }
-        }
-    } else {
-        alert("Fill Blank");
-    }
-} else {
-    alert('Please select a file to upload.');
-}
-
-
-
 ?>
+
+
 
 
 
@@ -128,24 +78,17 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
                 </button>
                 <button class="login100-form-btn" name="logout" style="width: 200px; background-color:black"">
                     Logout
-            </button>
+                </button>
             </form>
 
 
         </div>
         <div class=" container-login100">
                     <div class="wrap-login100">
-                        <form class="login100-form validate-form" method="POST" style="float: left;" enctype="multipart/form-data">
-                            <h1 style="margin-top: -150px;margin-bottom: 100px;">New Movie</h1>
+                        <form class="login100-form validate-form" method="POST" style="float: left;" enctype="multipart/form-data" action="inputnews.php">
+                            <h1 style="margin-top: -150px;margin-bottom: 100px;">About News</h1>
                             <div class="wrap-input100 ">
                                 <input class="input100" type="text" name="namemovie" placeholder="Nama Movie">
-                                <span class="focus-input100"></span>
-                                <span class="symbol-input100">
-                                    <i class="fa fa-users" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <div class="wrap-input100 ">
-                                <input class="input100" type="text" name="genre" placeholder="Genre">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-users" aria-hidden="true"></i>
@@ -158,11 +101,7 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
                                     <i class="fa fa-users" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <div class="wrap-input100 ">
-                                <label for="myfile">Select a file:</label>
-                                <input type="file" id="myfile" name="myfile"><br><br>
-                            </div>
-                            <button class="login100-form-btn" name="accept" style="width: 200px; background-color:black"">
+                            <button class="login100-form-btn" name="accept" style="width: 200px; background-color:black;margin-top: 75px;"">
                              Submit
                             </button>
                         </form>
@@ -175,5 +114,29 @@ if (isset($_POST["accept"]) && !empty($_FILES["myfile"]["name"])) {
 
 
 </body>
+<?php
+if (isset($_GET['err'])) {
+    if ($_GET['err'] == "no") {
+?>
+        <script>
+            Swal.fire(
+                'Berhasil!',
+                'Berhasil Menambah News!',
+                'success'
+            )
+        </script>
+    <?php
+    } else { ?>
+        <script>
+            swal.fire(
+                'Gagal!',
+                'Gagal Menambah News!',
+                'error'
+            )
+        </script>
+<?php
+    }
+}
+?>
 
 </html>
