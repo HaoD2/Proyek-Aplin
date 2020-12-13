@@ -1,3 +1,5 @@
+<script src="js/sweetalert2.all.js"></script>
+<link rel="stylesheet" href="css/sweetalert2.css">
 <?php
 require_once("helper.php");
 
@@ -74,7 +76,7 @@ if (isset($_POST['logout'])) {
         </form>      
         <div class=" container-login100">
                     <div class="wrap-login100">
-                        <form class="login100-form validate-form" method="POST" style="float: left;" enctype="multipart/form-data">
+                        <form class="login100-form validate-form" method="POST" style="float: left;" enctype="multipart/form-data" action="inserttrailer.php">
                             <h1 style="margin-top: -150px;margin-bottom: 100px;">New Trailer</h1>
                             <div class="wrap-input100 ">
                                 <input class="input100" type="text" name="nama_trailer" placeholder="Nama trailer">

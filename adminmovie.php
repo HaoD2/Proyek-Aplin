@@ -1,3 +1,5 @@
+<script src="js/sweetalert2.all.js"></script>
+<link rel="stylesheet" href="css/sweetalert2.css">
 <?php
 require_once("helper.php");
 
@@ -56,7 +58,7 @@ if(isset($_POST['News'])){
 <body>
 
     <div class="limiter">
-        <form method="post" action="insertmovie.php">
+        <form method="post">
             <div class="menuBar" style="display: flex;background-color: black;">
                 <button class="login100-form-btn" name="user" style="width: 200px; background-color:black ;">
                     User
@@ -79,7 +81,7 @@ if(isset($_POST['News'])){
         </div>
         <div class=" container-login100">
                     <div class="wrap-login100">
-                        <form class="login100-form validate-form" method="POST" style="float: left;" enctype="multipart/form-data">
+                        <form class="login100-form validate-form" method="POST" style="float: left;" enctype="multipart/form-data" action="insertmovie.php">
                             <h1 style="margin-top: -150px;margin-bottom: 100px;">New Movie</h1>
                             <div class="wrap-input100 ">
                                 <input class="input100" type="text" name="namemovie" placeholder="Nama Movie">

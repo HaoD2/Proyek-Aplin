@@ -33,7 +33,7 @@
                     // Upload file to server
                     if (move_uploaded_file($_FILES["myfile"]["tmp_name"], $targetFilePath)) {
                         // Insert image file name into database
-                        $insert = $conn->query("INSERT into trailer VALUES (null,'$namatrailer','$genre','$desc','". $fileName ."')");
+                        $insert = $conn->query("INSERT into trailer VALUES (0,'$namatrailer','$desc','". $fileName ."')");
                         if ($insert) {
                             alert("The file " . $fileName . " has been uploaded successfully.");
                             header("Location: admintrailer.php?err=no"); //BERHASIL INSERT TRAILER

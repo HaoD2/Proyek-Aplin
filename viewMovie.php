@@ -16,15 +16,23 @@ $tes = $_GET['title'];
 $user = $_SESSION['auth']['username'];
 
 $querysearch        = "SELECT * FROM movie where name_movie = '$tes'";
-$querydesc          = "SELECT d.detail FROM detailmovie as d,movie as m where d.id_movie = m.id_movie and m.name_movie = '$tes'";
-$queryratingfilm    = "SELECT COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
-$querycomment       = "SELECT COUNT(*) as jml FROM comment";
-$querycomment2      = "SELECT * FROM comment ORDER BY id desc";
-
-
 $movie = $conn->query($querysearch)->fetch_all(MYSQLI_ASSOC);
+
+$querydesc          = "SELECT d.detail FROM detailmovie as d,movie as m where d.id_movie = m.id_movie and m.name_movie = '$tes'";
 $synopsis = $conn->query($querydesc)->fetch_all(MYSQLI_ASSOC);
+
+$queryratingfilm    = "SELECT COUNT(r.rating) as totals,cast(SUM(r.rating) / COUNT(r.rating) as decimal(10,2)) as rate FROM detailmovie as d, movie as m, review as r WHERE m.id_movie = d.id_movie and r.id_movie = d.id_movie";
 $rating = $conn->query($queryratingfilm)->fetch_all(MYSQLI_ASSOC);
+
+$idmovie = $movie[0]['id_movie'];
+$querycomment       = "SELECT COUNT(*) as jml FROM comment where id_movie = '$idmovie'";
+
+$querycomment2      = "SELECT * FROM comment where id_movie = '$idmovie' ORDER BY id desc";
+
+
+
+
+
 $comment = $conn->query($querycomment)->fetch_all(MYSQLI_ASSOC);
 $comment2 = $conn->query($querycomment2)->fetch_all(MYSQLI_ASSOC);
 
