@@ -12,10 +12,12 @@
         //$password = $_POST["npass"];
         if($_POST["npass"]!="" && $_POST["cpass"]!=""){
             if($_POST["npass"]==$_POST["cpass"]){
-                $password = password_hash($_REQUEST["npass"],PASSWORD_DEFAULT);
-
+                $password = password_hash($_REQUEST["npass"], PASSWORD_DEFAULT);
+                $syarat = md5($_REQUEST["npass"]);
                 $temp = $_POST["user"];
-                $query = "UPDATE user SET `user`.`password`='$password' WHERE (`user`.username = '$temp' OR `user`.email = '$temp')";
+                $query = "UPDATE user SET password='$syarat' WHERE (username = '$temp' OR email = '$temp')";
+                $res = $conn->query($query);
+                $query = "UPDATE user SET password='$password' WHERE (username = '$temp' OR email = '$temp')";
                 $res = $conn->query($query);
 
                 if($res){
