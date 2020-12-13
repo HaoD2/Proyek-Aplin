@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2020 at 06:13 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Dec 13, 2020 at 04:13 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,6 +29,7 @@ USE `proyek`;
 -- Table structure for table `comment`
 --
 
+DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL,
   `id_movie` int(11) NOT NULL,
@@ -43,8 +43,8 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`id`, `id_movie`, `username`, `comment`, `timestamp`) VALUES
-(4, 1, 'a', 'aselole', '24 Nov 20 at 09:15'),
-(5, 1, 'a', 'anjay mabar', '24 Nov 20 at 09:19');
+(1, 2, 'a', 'sudah bagus, tingkatkan!!', '13 Dec 20 at 10:02'),
+(2, 4, 'q', 'mantap bang', '13 Dec 20 at 10:05');
 
 -- --------------------------------------------------------
 
@@ -52,6 +52,7 @@ INSERT INTO `comment` (`id`, `id_movie`, `username`, `comment`, `timestamp`) VAL
 -- Table structure for table `detailmovie`
 --
 
+DROP TABLE IF EXISTS `detailmovie`;
 CREATE TABLE `detailmovie` (
   `id_movie` int(11) NOT NULL,
   `detail` text NOT NULL
@@ -62,11 +63,10 @@ CREATE TABLE `detailmovie` (
 --
 
 INSERT INTO `detailmovie` (`id_movie`, `detail`) VALUES
-(1, 'jangan bercanda dengan saya kamu!'),
-(2, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.'),
-(3, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.'),
-(4, 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem excepturi nihil ducimus eligendi sed corporis voluptatibus earum fuga numquam provident. Repellendus atque placeat magnam quam mollitia repudiandae quis quaerat? Tempore!'),
-(5, 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem excepturi nihil ducimus eligendi sed corporis voluptatibus earum fuga numquam provident. Repellendus atque placeat magnam quam mollitia repudiandae quis quaerat? Tempore!');
+(1, 'a story about a fox that really like to dance'),
+(2, 'a young man that has a superpower from a radioactive spider'),
+(3, 'the story about an army of spartan that kills every enemies before their downfall'),
+(4, 'a family that finds a magical wardrobe that can teleported to another world');
 
 -- --------------------------------------------------------
 
@@ -74,6 +74,7 @@ INSERT INTO `detailmovie` (`id_movie`, `detail`) VALUES
 -- Table structure for table `history`
 --
 
+DROP TABLE IF EXISTS `history`;
 CREATE TABLE `history` (
   `id` int(11) NOT NULL,
   `username` varchar(12) NOT NULL,
@@ -85,8 +86,11 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`id`, `username`, `id_movie`) VALUES
-(1, 'a', 2),
-(2, 'a', 1);
+(1, 'a', 1),
+(2, 'a', 2),
+(3, 'a', 3),
+(4, 'q', 4),
+(5, 'q', 1);
 
 -- --------------------------------------------------------
 
@@ -94,8 +98,9 @@ INSERT INTO `history` (`id`, `username`, `id_movie`) VALUES
 -- Table structure for table `movie`
 --
 
+DROP TABLE IF EXISTS `movie`;
 CREATE TABLE `movie` (
-  `id_movie` int(10) NOT NULL,
+  `id_movie` int(11) NOT NULL,
   `name_movie` varchar(255) NOT NULL,
   `genre` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
@@ -107,11 +112,10 @@ CREATE TABLE `movie` (
 --
 
 INSERT INTO `movie` (`id_movie`, `name_movie`, `genre`, `image`, `rating`) VALUES
-(1, 'Sandy Adventure', 'Adventure', 'sandy.png', 0),
-(2, 'Spongebo The Movie', 'Fun', 'quot-the-spongebob-movie-sponge-on-the-run-quot-misi-spongebob-selamatkan-gary-yang-diculik-plankton.jpg', 0),
-(3, 'tess', 'Adventure', 'bg.jpg', 0),
-(4, 'q', 'q', 'bg.jpg', 0),
-(5, 'qq', 'qq', 'bg.jpg', 0);
+(1, 'Fantastic Mr.Fox', 'comedy,cartoon', 'coming-soon2.jpg', 0),
+(2, 'Spiderman 3', 'action', 'movie3.jpg', 0),
+(3, 'Gladiator', 'action,historical,thriller', 'movie5.jpg', 0),
+(4, 'The Chronicles of Narnia', 'action,fiction', 'movie11.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -119,6 +123,7 @@ INSERT INTO `movie` (`id_movie`, `name_movie`, `genre`, `image`, `rating`) VALUE
 -- Table structure for table `news`
 --
 
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `id` int(11) NOT NULL,
   `head_news` varchar(225) NOT NULL,
@@ -131,7 +136,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `head_news`, `detail_news`, `timestamp`) VALUES
-(0, 'dummy', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur veniam ducimus voluptas nisi minus obcaecati saepe amet, ut accusantium molestiae commodi facilis repellat non. Alias eligendi nostrum quam iure in.', '02-12-2020');
+(3, 'Spiderman 2 ', 'will come out at this weekend ', '13 Dec 20 at 09:24'),
+(4, 'squidward the movie', 'squidward will come out at this january to save bikini bottom', '13 Dec 20 at 09:30');
 
 -- --------------------------------------------------------
 
@@ -139,6 +145,7 @@ INSERT INTO `news` (`id`, `head_news`, `detail_news`, `timestamp`) VALUES
 -- Table structure for table `review`
 --
 
+DROP TABLE IF EXISTS `review`;
 CREATE TABLE `review` (
   `id` int(11) NOT NULL COMMENT 'cmn buat auto increment',
   `id_movie` int(11) NOT NULL COMMENT 'id movie yang di rate',
@@ -151,7 +158,8 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`id`, `id_movie`, `rating`, `username`) VALUES
-(8, 1, 5, 'a');
+(9, 2, 3, 'a'),
+(10, 4, 5, 'q');
 
 -- --------------------------------------------------------
 
@@ -159,6 +167,7 @@ INSERT INTO `review` (`id`, `id_movie`, `rating`, `username`) VALUES
 -- Table structure for table `trailer`
 --
 
+DROP TABLE IF EXISTS `trailer`;
 CREATE TABLE `trailer` (
   `id` int(11) NOT NULL,
   `nama_trailer` varchar(225) NOT NULL,
@@ -171,7 +180,8 @@ CREATE TABLE `trailer` (
 --
 
 INSERT INTO `trailer` (`id`, `nama_trailer`, `desc_trailer`, `images`) VALUES
-(0, 'Avengers : S', 'ini bukan avengers endgame', 'sandy.jgp');
+(2, 'kung fu panda', 'a panda who want to learn kung fu', 'movie9.jpg'),
+(3, 'Motives', 'a person who wants to become a police to fight crime', 'movie17.jpg');
 
 -- --------------------------------------------------------
 
@@ -179,6 +189,7 @@ INSERT INTO `trailer` (`id`, `nama_trailer`, `desc_trailer`, `images`) VALUES
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `fullname` varchar(255) NOT NULL,
@@ -197,7 +208,8 @@ INSERT INTO `user` (`username`, `fullname`, `password`, `email`, `role`, `status
 ('admin', 'admin', '$2y$10$EtuV6F6MWYDYV.9o3Qbo/.4c0X4KsrsyfpXs8cltgN0it.S56wOZC', 'admin@serverhost.co.id', 1, 0),
 ('kevin', 'Kevin Hao', '$2y$10$vWIk706qzH6TExniINxYaOyNibiI2UUnpFsIh6WA8dStQ0sy1PNvu', 'Kev@server7mail.com', 3, 0),
 ('Russel', 'Russel', '$2y$10$u/oSUsl03qj67vsQFgMtSOujcgX6iqzD1WhGb.MPwF4azlfgHLYkq', 'russ@st.co.id', 2, 1),
-('owen', 'kevin owen', '$2y$10$Nxc04feR0pXm9ykJUGiVueqROS6BC/3Qw0vu.76dd0KCJ.qnsweCe', 'kevinowen05@gmail.com', 3, 1);
+('owen', 'kevin owen', '$2y$10$Nxc04feR0pXm9ykJUGiVueqROS6BC/3Qw0vu.76dd0KCJ.qnsweCe', 'kevinowen05@gmail.com', 3, 1),
+('q', 'q', '$2y$10$d/aTY1ynQnfg6YbwuW23X.PcEYBxvnDb19rQGYkYvLflbatKZlL5u', 'qwe@gmail.com', 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -228,6 +240,12 @@ ALTER TABLE `movie`
   ADD PRIMARY KEY (`id_movie`);
 
 --
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `review`
 --
 ALTER TABLE `review`
@@ -238,6 +256,52 @@ ALTER TABLE `review`
 --
 ALTER TABLE `trailer`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `detailmovie`
+--
+ALTER TABLE `detailmovie`
+  MODIFY `id_movie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `history`
+--
+ALTER TABLE `history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `movie`
+--
+ALTER TABLE `movie`
+  MODIFY `id_movie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'cmn buat auto increment', AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `trailer`
+--
+ALTER TABLE `trailer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

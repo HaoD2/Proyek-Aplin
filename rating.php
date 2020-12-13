@@ -11,7 +11,7 @@
         // update data
         $query = "UPDATE review SET rating = '$rating' where username = '$user'";
         if($conn ->query($query) === true){
-           echo "Thankyou for updating your review!";
+           echo "Thank you for updating your review!";
         }
         
     }else{
@@ -20,7 +20,7 @@
         $id = $id_movie[0]['id'];
         $query = "INSERT INTO review values(0,$id,$rating,'$user')";
         if($conn ->query($query) === true){
-            echo "Thankyou for your feedback!";
+            echo "Thank you for your feedback!";
         }
     }
 ?>

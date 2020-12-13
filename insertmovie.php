@@ -33,7 +33,7 @@
                     if (move_uploaded_file($_FILES["myfile"]["tmp_name"], $targetFilePath)) {
                         // Insert image file name into database
                         
-                        if ($conn -> query("INSERT into movie VALUES(0,'$namaMovie','$genre','" . $fileName . "')") == true) {
+                        if ($conn -> query("INSERT into movie VALUES(0,'$namaMovie','$genre','" . $fileName . "',0)") == true) {
                             $insert2 = $conn->query("INSERT into detailmovie VALUES (0,'$desc')");
                             header("Location: adminmovie.php?err=no"); //UPLOAD SUKSES
                         } else {

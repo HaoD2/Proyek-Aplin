@@ -59,7 +59,7 @@ if (isset($_POST["btnlogout"])) {
     }
 
     .pic img {
-        width: 120%;
+        width: 50%;
         margin-top: 10%;
         margin-bottom: 10%;
         margin-left: 5%;
@@ -67,7 +67,7 @@ if (isset($_POST["btnlogout"])) {
 
     .desc {
         width: 70%;
-        margin-left: 7%;
+        margin-left: -100px;
         float: left;
     }
     #subhead{

@@ -106,7 +106,7 @@ if(!isset($history[0]['username']) && isset($_SESSION['auth']['username'])){
     }
 
     .pic img {
-        width: 90%;
+        width: 60%;
         margin-top: 10%;
         margin-bottom: 5%;
         margin-left: 5%;
