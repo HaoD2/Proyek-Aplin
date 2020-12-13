@@ -7,13 +7,15 @@
     $conn = $db->getConnection();
 
     if (isset($_POST['asRegister'])) {
+		
         $isCheck = false;
         $username = $_POST['username'];
         $password = $_POST['pass'];
         $fullname = $_POST['fullname'];
         $cpassword = $_POST['cpass'];
         $email = $_POST['email'];
-        $role = $_POST['role'];
+		$role = $_POST['role'];
+		
     }
 
 ?>
@@ -56,7 +58,7 @@
 					<img src="images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" method="post">
+				<form class="login100-form validate-form" method="post" action="prosesregister.php">
 					<span class="login100-form-title">
 						Member Register
 					</span>
